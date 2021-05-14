@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:glance/screens/welcome_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -54,11 +55,11 @@ class _SplashScreenState extends State<SplashScreen> {
                           ),
                           Text(
                             'Glance',
-                            style: TextStyle(
-                                fontSize: 26,
+                            style: GoogleFonts.openSans(
+                                fontSize: 28,
                                 color: Colors.black,
                                 fontWeight: FontWeight.w900,
-                                letterSpacing: 1.5),
+                                letterSpacing: 2.5),
                           )
                         ],
                       ),

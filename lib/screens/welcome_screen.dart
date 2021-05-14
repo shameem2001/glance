@@ -35,7 +35,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
               Center(
                 child: RoundedButton(
-                    title: 'Log in',
+                    title: 'Sign in',
                     color: Colors.black,
                     onpressed: () {
                       Navigator.pushNamed(context, LoginScreen.id);
