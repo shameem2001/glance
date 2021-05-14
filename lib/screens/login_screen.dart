@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:glance/screens/home_page.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -178,10 +179,11 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildSocialBtn(Function onTap, AssetImage logo) {
+  Widget _buildSocialBtn() {
     return GestureDetector(
-      onTap: onTap,
+      onTap: (){},
       child: Container(
+        margin: EdgeInsets.symmetric(vertical: 20,),
         height: 60.0,
         width: 60.0,
         decoration: BoxDecoration(
@@ -195,21 +197,10 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ],
           image: DecorationImage(
-            image: logo,
+            image: AssetImage('assets/google_icon.jpg'),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildSocialBtnRow() {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 30.0),
-      child: _buildSocialBtn(
-            () => print('Login with Google'),
-        AssetImage(
-          'assets/google_icon.jpg',
-        ),
+        //child: Icon(FontAwesomeIcons.google, size: 26,),
       ),
     );
   }
@@ -246,7 +237,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       _buildRememberMeCheckbox(),
                       _buildLoginBtn(),
                       _buildSignInWithText(),
-                      _buildSocialBtnRow(),
+                      _buildSocialBtn(),
                     ],
                   ),
                 ),
