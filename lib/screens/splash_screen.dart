@@ -1,8 +1,7 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:glance/login_screen.dart';
-import 'package:glance/welcome_screen.dart';
+import 'package:glance/screens/welcome_screen.dart';
+
 
 class SplashScreen extends StatefulWidget {
   static const String id = "splash_screen";
@@ -32,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
             children: <Widget>[
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
               Column(
@@ -57,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
                             'Glance',
                             style: TextStyle(
                                 fontSize: 26,
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontWeight: FontWeight.w900,
                                 letterSpacing: 1.5),
                           )

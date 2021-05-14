@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:glance/home_page.dart';
-import 'package:glance/login_screen.dart';
-import 'package:glance/register_screen.dart';
-import 'package:glance/splash_screen.dart';
-import 'package:glance/welcome_screen.dart';
+import 'package:glance/screens/home_page.dart';
+import 'package:glance/screens/login_screen.dart';
+import 'package:glance/screens/register_screen.dart';
+import 'package:glance/screens/splash_screen.dart';
+import 'package:glance/screens/welcome_screen.dart';
+
 
 void main() {
   runApp(Glance());
