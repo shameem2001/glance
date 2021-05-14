@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:glance/login_screen.dart';
+import 'package:glance/welcome_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String id = "splash_screen";
@@ -18,8 +19,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 2),
-            () => Navigator.pushReplacementNamed(context, LoginScreen.id));
+    Timer(Duration(seconds: 3),
+            () => Navigator.pushReplacementNamed(context, WelcomeScreen.id));
   }
 
   @override
