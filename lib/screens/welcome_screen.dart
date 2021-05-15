@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:glance/components/roundedButton.dart';
+import 'package:glance/screens/enter_details_screen.dart';
 import 'package:glance/screens/home_page.dart';
 import 'package:glance/screens/login_screen.dart';
 
@@ -30,16 +31,24 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Center(
-                child: RoundedButton(
-                    title: 'Sign in',
-                    color: Colors.black,
-                    onpressed: () {
-                      Navigator.pushNamed(context, LoginScreen.id);
-                    }),
+              Column(
+                children: [
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  RoundedButton(
+                      title: 'LOG IN',
+                      color: Colors.black,
+                      onpressed: () {
+                        Navigator.pushReplacementNamed(context, LoginScreen.id);
+                      }),
+                  RoundedButton(
+                      title: 'REGISTER',
+                      color: Colors.black,
+                      onpressed: () {
+                        Navigator.pushReplacementNamed(context, EnterDetailsScreen.id);
+                      }),
+                ],
               ),
             ],
           ),

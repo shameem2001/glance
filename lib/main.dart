@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:glance/screens/enter_details_screen.dart';
 import 'package:glance/screens/home_page.dart';
 import 'package:glance/screens/login_screen.dart';
 import 'package:glance/screens/register_screen.dart';
@@ -21,6 +22,7 @@ class Glance extends StatelessWidget {
         SplashScreen.id: (context) => SplashScreen(),
         WelcomeScreen.id: (context) => WelcomeScreen(),
         LoginScreen.id: (context) => LoginScreen(),
+        EnterDetailsScreen.id: (context) => EnterDetailsScreen(),
         RegisterScreen.id: (context) => RegisterScreen(),
         HomePage.id: (context) => HomePage(),
       },

@@ -1,29 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'home_page.dart';
+import 'package:glance/screens/register_screen.dart';
 import 'login_screen.dart';
 
-class RegisterScreen extends StatefulWidget {
-  static const String id = "register_screen";
+class EnterDetailsScreen extends StatefulWidget {
+  static const String id = "enter_details";
 
-  const RegisterScreen({Key key}) : super(key: key);
+  const EnterDetailsScreen({Key key}) : super(key: key);
 
   @override
-  _RegisterScreenState createState() => _RegisterScreenState();
+  _EnterDetailsScreenState createState() => _EnterDetailsScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
-  String email;
-  String password;
-  String password2;
+class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
 
-  Widget _buildEmailTF() {
+  Widget _buildUsernameTF() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Email Address',
+          'Name',
           style: kLabelStyle,
         ),
         SizedBox(height: 10.0),
@@ -46,7 +43,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 Icons.person,
                 color: Colors.black,
               ),
-              hintText: 'Enter your email',
+              hintText: 'Enter your Name',
               hintStyle: kHintTextStyle,
             ),
           ),
@@ -55,12 +52,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  Widget _buildPasswordTF() {
+  Widget _buildPhoneTF() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Password',
+          'Phone number',
           style: kLabelStyle,
         ),
         SizedBox(height: 10.0),
@@ -70,9 +67,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           height: 60.0,
           child: TextField(
             onSubmitted: (value){
-              password = value;
             },
-            obscureText: true,
+            keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.black,
               fontFamily: 'OpenSans',
@@ -81,10 +77,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
-                Icons.lock,
+                Icons.phone,
                 color: Colors.black,
               ),
-              hintText: 'Enter your Password',
+              hintText: 'Enter Phone Number',
               hintStyle: kHintTextStyle,
             ),
           ),
@@ -93,12 +89,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  Widget _buildConfirmPasswordTF() {
+  Widget _buildSubscriptionNoTF() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Confirm Password',
+          'Subscription Number',
           style: kLabelStyle,
         ),
         SizedBox(height: 10.0),
@@ -108,9 +104,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           height: 60.0,
           child: TextField(
             onSubmitted: (value){
-              password2 = value;
             },
-            obscureText: true,
+            keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.black,
               fontFamily: 'OpenSans',
@@ -119,10 +114,49 @@ class _RegisterScreenState extends State<RegisterScreen> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
-                Icons.lock,
-                color: Colors.black,
+                  Icons.pending_actions_rounded,
+                  color: Colors.black,
+                  size:24
               ),
-              hintText: 'Re-enter your Password',
+              hintText: 'Enter your subscription number',
+              hintStyle: kHintTextStyle,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildAddressTF() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'Address',
+          style: kLabelStyle,
+        ),
+        SizedBox(height: 10.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: kBoxDecorationStyle,
+          height: 60.0,
+          child: TextField(
+            onSubmitted: (value){
+            },
+            keyboardType: TextInputType.emailAddress,
+            style: TextStyle(
+              color: Colors.black,
+              fontFamily: 'OpenSans',
+            ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 14.0),
+              prefixIcon: Icon(
+                FontAwesomeIcons.solidAddressBook,
+                color: Colors.black,
+                size: 22,
+              ),
+              hintText: 'Enter your Address',
               hintStyle: kHintTextStyle,
             ),
           ),
@@ -135,27 +169,36 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
+      // ignore: deprecated_member_use
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: () => Navigator.pushReplacementNamed(context, HomePage.id),
+        onPressed: () => Navigator.pushReplacementNamed(context, RegisterScreen.id),
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),
         color: Colors.black,
-        child: Text(
-          'REGISTER',
-          style: TextStyle(
-            color: Colors.white,
-            letterSpacing: 1.5,
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'OpenSans',
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'CONTINUE',
+              style: TextStyle(
+                color: Colors.white,
+                letterSpacing: 1.5,
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'OpenSans',
+              ),
+            ),
+            SizedBox(width: 10,),
+            Icon(Icons.arrow_forward_ios, color: Colors.white, size: 20,)
+          ],
         ),
       ),
     );
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -176,7 +219,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            'Register',
+                            'Enter Details',
                             style: TextStyle(
                               color: Colors.black,
                               fontFamily: 'OpenSans',
@@ -185,15 +228,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                           ),
                           SizedBox(height: 30.0),
-                          _buildEmailTF(),
+                          _buildUsernameTF(),
                           SizedBox(
                             height: 30.0,
                           ),
-                          _buildPasswordTF(),
+                          _buildPhoneTF(),
                           SizedBox(
                             height: 30.0,
                           ),
-                          _buildConfirmPasswordTF(),
+                          _buildSubscriptionNoTF(),
+                          SizedBox(
+                            height: 30.0,
+                          ),
+                          _buildAddressTF(),
                           SizedBox(
                             height: 30.0,
                           ),

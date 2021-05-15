@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Username',
+          'Email Address',
           style: kLabelStyle,
         ),
         SizedBox(height: 10.0),
@@ -57,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Icons.person,
                 color: Colors.black,
               ),
-              hintText: 'Enter your Email',
+              hintText: 'Enter your email',
               hintStyle: kHintTextStyle,
             ),
           ),
@@ -218,48 +218,41 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.light,
-        child : GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical:20.0, horizontal: 40.0),
-                child: SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  child: Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              'Sign In',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'OpenSans',
-                                fontSize: 30.0,
-                                fontWeight: FontWeight.bold,
+    return SafeArea(
+      child: Scaffold(
+        body: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.light,
+          child : GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical:20.0, horizontal: 40.0),
+                  child: SingleChildScrollView(
+                    physics: AlwaysScrollableScrollPhysics(),
+                    child: Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              _buildPhoto(),
+                              SizedBox(height: 30.0),
+                              _buildEmailTF(),
+                              SizedBox(
+                                height: 30.0,
                               ),
-                            ),
-                            _buildPhoto(),
-                            SizedBox(height: 30.0),
-                            _buildEmailTF(),
-                            SizedBox(
-                              height: 30.0,
-                            ),
-                            _buildPasswordTF(),
-                            _buildForgotPasswordBtn(),
-                            _buildRememberMeCheckbox(),
-                            _buildLoginBtn(),
-                            _buildSignInWithText(),
-                            _buildSocialBtn(),
-                          ],
+                              _buildPasswordTF(),
+                              _buildForgotPasswordBtn(),
+                              _buildRememberMeCheckbox(),
+                              _buildLoginBtn(),
+                              _buildSignInWithText(),
+                              _buildSocialBtn(),
+                            ],
+                          ),
                         ),
-                      ),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
