@@ -17,6 +17,17 @@ class _LoginScreenState extends State<LoginScreen> {
   String username;
   String password;
 
+  Widget _buildPhoto() {
+    return Container(
+      height: 150,
+      decoration:BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/glance2.jpg'),
+        )
+      )
+    );
+  }
+
   Widget _buildEmailTF() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -208,40 +219,48 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical:20.0, horizontal: 40.0),
-            child: Container(
-                  height: double.infinity,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Sign In',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OpenSans',
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.light,
+        child : GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical:20.0, horizontal: 40.0),
+                child: SingleChildScrollView(
+                  physics: AlwaysScrollableScrollPhysics(),
+                  child: Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              'Sign In',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'OpenSans',
+                                fontSize: 30.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            _buildPhoto(),
+                            SizedBox(height: 30.0),
+                            _buildEmailTF(),
+                            SizedBox(
+                              height: 30.0,
+                            ),
+                            _buildPasswordTF(),
+                            _buildForgotPasswordBtn(),
+                            _buildRememberMeCheckbox(),
+                            _buildLoginBtn(),
+                            _buildSignInWithText(),
+                            _buildSocialBtn(),
+                          ],
                         ),
                       ),
-                      SizedBox(height: 30.0),
-                      _buildEmailTF(),
-                      SizedBox(
-                        height: 30.0,
-                      ),
-                      _buildPasswordTF(),
-                      _buildForgotPasswordBtn(),
-                      _buildRememberMeCheckbox(),
-                      _buildLoginBtn(),
-                      _buildSignInWithText(),
-                      _buildSocialBtn(),
-                    ],
-                  ),
                 ),
-          )
+              ),
+            ],
+          ),
         ),
       ),
     );
