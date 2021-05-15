@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:glance/screens/enter_details_screen.dart';
 import 'package:glance/screens/home_page.dart';
 import 'package:glance/screens/login_screen.dart';
+import 'package:glance/screens/payments_screen.dart';
+import 'package:glance/screens/profile_screen.dart';
 import 'package:glance/screens/register_screen.dart';
 import 'package:glance/screens/splash_screen.dart';
 import 'package:glance/screens/welcome_screen.dart';
@@ -25,6 +27,8 @@ class Glance extends StatelessWidget {
         EnterDetailsScreen.id: (context) => EnterDetailsScreen(),
         RegisterScreen.id: (context) => RegisterScreen(),
         HomePage.id: (context) => HomePage(),
+        ProfileScreen.id: (context) => ProfileScreen(),
+        PaymentsScreen.id: (context) => PaymentsScreen(),
       },
     );
   }
