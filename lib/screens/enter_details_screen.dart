@@ -15,6 +15,11 @@ class EnterDetailsScreen extends StatefulWidget {
 
 class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
 
+  String name;
+  String phone;
+  String address;
+  String subscriptionNumber;
+
   Widget _buildUsernameTF() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,8 +35,9 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
           height: 60.0,
           child: TextField(
             onSubmitted: (value){
+              name = value;
             },
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.name,
             style: TextStyle(
               color: Colors.black,
               fontFamily: 'OpenSans',
@@ -67,8 +73,9 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
           height: 60.0,
           child: TextField(
             onSubmitted: (value){
+              phone = value;
             },
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.phone,
             style: TextStyle(
               color: Colors.black,
               fontFamily: 'OpenSans',
@@ -104,8 +111,9 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
           height: 60.0,
           child: TextField(
             onSubmitted: (value){
+              subscriptionNumber = value;
             },
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.number,
             style: TextStyle(
               color: Colors.black,
               fontFamily: 'OpenSans',
@@ -142,8 +150,9 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
           height: 60.0,
           child: TextField(
             onSubmitted: (value){
+              address = value;
             },
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.streetAddress,
             style: TextStyle(
               color: Colors.black,
               fontFamily: 'OpenSans',
