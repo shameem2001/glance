@@ -17,9 +17,9 @@ class NotificationCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Image.asset("assets/data.jpg",scale: 7,),
+                  Image.asset("assets/data.jpg",scale: 25,),
                   Padding(
-                    padding: EdgeInsets.only(left: 10),
+                    padding: EdgeInsets.only(left: 30),
                     child: Text(
                       'Data Plan Exhausted',
                       style: GoogleFonts.montserrat(
