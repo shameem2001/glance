@@ -33,7 +33,6 @@ class Glance extends StatelessWidget {
         PaymentsScreen.id: (context) => PaymentsScreen(),
         BillCalculatorScreen.id: (context) => BillCalculatorScreen(),
         NotificationScreen.id: (context) => NotificationScreen(),
-        MainPage.id: (context) => MainPage(),
       },
     );
   }

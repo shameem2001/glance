@@ -45,14 +45,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Material(
+              elevation: 2,
+              borderRadius: BorderRadius.all(Radius.circular(60)),
+              child: CircleAvatar(
+                radius: 60,
+                backgroundImage: AssetImage('assets/profile.png'),
+                foregroundColor: Colors.grey,
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
               child: Text(
-                "Personal Information",
+                "John Doe",
                 style: TextStyle(
                   fontFamily: 'Montserrat',
                   color: Colors.black,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w700,
                   fontSize: 22.5,
                 ),
               ),
@@ -64,7 +73,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   elevation: 10,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: Container(
-                    height: MediaQuery.of(context).size.height - 330,
+                    height: MediaQuery.of(context).size.height - 300,
                     width: MediaQuery.of(context).size.width - 50,
                     child: Padding(
                       padding:
@@ -74,7 +83,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'ID',
+                            'ID:',
                             textAlign: TextAlign.start,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -97,7 +106,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ),
                           Text(
-                            'Full Name',
+                            'Full Name:',
                             textAlign: TextAlign.start,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -120,7 +129,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ),
                           Text(
-                            'Email',
+                            'Email:',
                             textAlign: TextAlign.start,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -143,7 +152,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ),
                           Text(
-                            'Phone Number',
+                            'Phone Number:',
                             textAlign: TextAlign.start,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -165,11 +174,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                             ),
                           ),
+                          Text(
+                            'Subscription Number:',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'Montserrat',
+                              color: Colors.black,
+                              fontSize: 20,
+                            ),
+                          ),
+                          Text(
+                            '90564',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              fontFamily: 'Montserrat',
+                              color: Colors.black,
+                              fontSize: 20,
+                            ),
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Password',
+                                'Password:',
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
