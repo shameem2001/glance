@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:glance/screens/bill_calculator_screen.dart';
 import 'package:glance/screens/enter_details_screen.dart';
 import 'package:glance/screens/home_page.dart';
 import 'package:glance/screens/login_screen.dart';
+import 'package:glance/screens/notification_screen.dart';
 import 'package:glance/screens/payments_screen.dart';
 import 'package:glance/screens/profile_screen.dart';
 import 'package:glance/screens/register_screen.dart';
@@ -19,7 +21,7 @@ class Glance extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: SplashScreen.id,
+      initialRoute: HomePage.id,
       routes: {
         SplashScreen.id: (context) => SplashScreen(),
         WelcomeScreen.id: (context) => WelcomeScreen(),
@@ -29,6 +31,9 @@ class Glance extends StatelessWidget {
         HomePage.id: (context) => HomePage(),
         ProfileScreen.id: (context) => ProfileScreen(),
         PaymentsScreen.id: (context) => PaymentsScreen(),
+        BillCalculatorScreen.id: (context) => BillCalculatorScreen(),
+        NotificationScreen.id: (context) => NotificationScreen(),
+        MainPage.id: (context) => MainPage(),
       },
     );
   }
