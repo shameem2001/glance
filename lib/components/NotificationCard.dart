@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class NotificationCard extends StatelessWidget {
   @override
@@ -16,12 +17,14 @@ class NotificationCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Image.asset("images/Group 48.png"),
+                  Image.asset("assets/data.jpg",scale: 7,),
                   Padding(
                     padding: EdgeInsets.only(left: 10),
                     child: Text(
-                      'Farm 1 report Uploaded',
-                      style: TextStyle(color: Colors.black),
+                      'Data Plan Exhausted',
+                      style: GoogleFonts.montserrat(
+                          fontSize: 16,
+                          color: Colors.black),
                     ),
                   ),
                 ],

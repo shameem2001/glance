@@ -5,6 +5,7 @@ import 'home_page.dart';
 
 class NotificationScreen extends StatefulWidget {
   static const String id = '/notify';
+
   @override
   _NotificationScreenState createState() => _NotificationScreenState();
 }
@@ -18,11 +19,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if(Navigator.canPop(context)){
+        if (Navigator.canPop(context)) {
           Navigator.pop(context);
           return true;
-        }
-        else{
+        } else {
           Navigator.popAndPushNamed(context, HomePage.id);
           return false;
         }
@@ -33,29 +33,17 @@ class _NotificationScreenState extends State<NotificationScreen> {
           children: <Widget>[
             Container(
               height: MediaQuery.of(context).size.height,
-              color: Color(0xff164B77),
+              color: Colors.white60,
               child: Padding(
                 padding: EdgeInsets.only(top: 50, left: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 10),
-                      child: Text(
-                        "Executive App",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontFamily: 'Montserrat',
-                          fontStyle: FontStyle.normal,
-                        ),
-                      ),
-                    ),
                     Text(
                       "Notifications",
                       style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 23,
                           fontFamily: 'Montserrat',
                           fontStyle: FontStyle.normal,
@@ -71,14 +59,21 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 onRefresh: refreshList,
                 color: Colors.black,
                 child: Container(
-                  height: MediaQuery.of(context).size.height - 150,
+                  height: MediaQuery.of(context).size.height - 100,
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(33),
-                      topRight: Radius.circular(33),
-                    ),
-                  ),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(33),
+                        topRight: Radius.circular(33),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.8),
+                          spreadRadius: 10,
+                          blurRadius: 5,
+                          offset: Offset(0, 7),
+                        ),
+                      ]),
                   child: Padding(
                     padding: EdgeInsets.only(top: 40),
                     child: Container(
