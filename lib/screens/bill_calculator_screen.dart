@@ -11,6 +11,9 @@ class BillCalculatorScreen extends StatefulWidget {
 class _BillCalculatorScreenState extends State<BillCalculatorScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(),
+      body: Container(),
+    );
   }
 }
