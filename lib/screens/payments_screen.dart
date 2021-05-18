@@ -170,7 +170,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                            top: 20.0, bottom: 20, left: 60, right: 60),
+                            top: 20.0, bottom: 10, left: 60, right: 60),
                         child: _buildTile(
                           Padding(
                             padding: const EdgeInsets.symmetric(
