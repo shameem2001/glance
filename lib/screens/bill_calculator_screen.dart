@@ -20,6 +20,7 @@ class _BillCalculatorScreenState extends State<BillCalculatorScreen> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
+          toolbarHeight: 70,
           backgroundColor: Colors.white.withOpacity(0.9),
           centerTitle: true,
           leading: IconButton(

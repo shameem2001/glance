@@ -31,6 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
+          toolbarHeight: 70,
           backgroundColor: Colors.white,
           centerTitle: true,
           leading: IconButton(icon: Icon(Icons.arrow_back, color: Colors.black, size: 28,), onPressed: () {Navigator.popAndPushNamed(context, HomePage.id);},),
