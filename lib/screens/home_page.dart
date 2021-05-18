@@ -5,6 +5,7 @@ import 'package:glance/components/DrawerBeta.dart';
 import 'package:glance/screens/notification_screen.dart';
 import 'package:glance/screens/payments_screen.dart';
 import 'package:glance/screens/profile_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'bill_calculator_screen.dart';
 import 'package:flutter_sparkline/flutter_sparkline.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -245,6 +246,12 @@ class _HomePageState extends State<HomePage> {
   setBottomBarIndex(index) {
     setState(() {
       currentIndex = index;
+      if(currentIndex == 0)
+        Navigator.pushReplacementNamed(context, BillCalculatorScreen.id);
+      else if(currentIndex == 1)
+        Navigator.pushReplacementNamed(context, PaymentsScreen.id);
+      else if(currentIndex == 2)
+        Navigator.pushReplacementNamed(context, ProfileScreen.id);
     });
   }
 
@@ -255,6 +262,64 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         backgroundColor: Colors.white.withOpacity(0.95),
         drawer: DrawerBeta(),
+        bottomNavigationBar: Container(
+          width: size.width,
+          height: 80,
+          child: Stack(
+            overflow: Overflow.visible,
+            children: [
+              CustomPaint(
+                size: Size(size.width, 80),
+                painter: BNBCustomPainter(),
+              ),
+              Center(
+                heightFactor: 0.6,
+                child: FloatingActionButton(backgroundColor: Colors.black,
+                    child: Icon(FontAwesomeIcons.rupeeSign, size: 30,),
+                    elevation: 2,
+                    onPressed: () {
+                      setBottomBarIndex(1);
+                    }),
+              ),
+              Container(
+                width: size.width,
+                height: 80,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 40.0),
+                      child: IconButton(
+                        icon: Icon(
+                          FontAwesomeIcons.receipt,
+                          size: 32,
+                          color: currentIndex == 0 ? Colors.black : Colors.grey.shade400,
+                        ),
+                        onPressed: () {
+                          print("Pressed");
+                          setBottomBarIndex(0);
+                        },
+                        splashColor: Colors.white,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 40.0),
+                      child: IconButton(
+                          icon: Icon(
+                            FontAwesomeIcons.solidUser,
+                            size: 32,
+                            color: currentIndex == 3 ? Colors.black : Colors.black,
+                          ),
+                          onPressed: () {
+                            setBottomBarIndex(2);
+                          }),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
         appBar: AppBar(
             iconTheme: IconThemeData(color: Colors.black),
             backgroundColor: Colors.transparent,
@@ -272,57 +337,6 @@ class _HomePageState extends State<HomePage> {
             ]),
         body: Stack(
           children: [
-            Positioned(
-              bottom: 0,
-              left: 0,
-              child: Container(
-                width: size.width,
-                height: 80,
-                child: Stack(
-                  overflow: Overflow.visible,
-                  children: [
-                    CustomPaint(
-                      size: Size(size.width, 80),
-                      painter: BNBCustomPainter(),
-                    ),
-                    Center(
-                      heightFactor: 0.6,
-                      child: FloatingActionButton(backgroundColor: Colors.black,
-                          child: Icon(FontAwesomeIcons.rupeeSign), elevation: 2, onPressed: () {}),
-                    ),
-                    Container(
-                      width: size.width,
-                      height: 80,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          IconButton(
-                            icon: Icon(
-                              Icons.home,
-                              size: 34,
-                              color: currentIndex == 0 ? Colors.black : Colors.grey.shade400,
-                            ),
-                            onPressed: () {
-                              setBottomBarIndex(0);
-                            },
-                            splashColor: Colors.white,
-                          ),
-                          IconButton(
-                              icon: Icon(
-                                Icons.notifications,
-                                size: 34,
-                                color: currentIndex == 3 ? Colors.black : Colors.black,
-                              ),
-                              onPressed: () {
-                                setBottomBarIndex(2);
-                              }),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
             StaggeredGridView.count(
               shrinkWrap: false,
               crossAxisCount: 2,
@@ -333,15 +347,29 @@ class _HomePageState extends State<HomePage> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
-                      child: Text(
-                        "Hi John",
-                        style: TextStyle(
-                            fontSize: 32,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w700),
-                      ),
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
+                          child: Text(
+                            "Hello,",
+                            style: GoogleFonts.raleway(
+                                fontSize: 32,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                          child: Text(
+                            " John",
+                            style: GoogleFonts.raleway(
+                                fontSize: 32,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -435,7 +463,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
               staggeredTiles: [
-                StaggeredTile.extent(2, 55.0),
+                StaggeredTile.extent(2, 100.0),
                 StaggeredTile.extent(2, 110.0),
                 StaggeredTile.extent(2, 220.0),
               ],
