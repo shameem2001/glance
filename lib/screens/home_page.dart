@@ -240,32 +240,21 @@ class _HomePageState extends State<HomePage> {
   ];
   String actualDropdown = chartDropdownItems[0];
   int actualChart = 0;
+  int currentIndex = 0;
+
+  setBottomBarIndex(index) {
+    setState(() {
+      currentIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white.withOpacity(0.95),
         drawer: DrawerBeta(),
-        bottomNavigationBar: FancyBottomNavigation(
-          activeIconColor: Colors.black,
-          inactiveIconColor: Colors.black,
-          circleColor: Colors.black12,
-          textColor: Colors.black,
-          initialSelection: 1,
-          tabs: [
-            TabData(iconData: FontAwesomeIcons.receipt, title: "Bill Calculator"),
-            TabData(iconData: FontAwesomeIcons.rupeeSign, title: "Pay"),
-            TabData(iconData: FontAwesomeIcons.solidUser, title: "Profile")
-          ],
-          onTabChangedListener: (position) {
-              if (position == 0)
-                Navigator.pushNamed(context, BillCalculatorScreen.id);
-              else if (position == 1)
-                Navigator.pushNamed(context, PaymentsScreen.id);
-              else if (position == 2)
-                Navigator.pushReplacementNamed(context, ProfileScreen.id);
-          },
-        ),
         appBar: AppBar(
             iconTheme: IconThemeData(color: Colors.black),
             backgroundColor: Colors.transparent,
@@ -281,123 +270,177 @@ class _HomePageState extends State<HomePage> {
                     Navigator.pushNamed(context, NotificationScreen.id);
                   }),
             ]),
-        body: Center(
-          child: StaggeredGridView.count(
-            crossAxisCount: 2,
-            crossAxisSpacing: 12.0,
-            mainAxisSpacing: 12.0,
-            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
-                    child: Text(
-                      "Hi John",
-                      style: TextStyle(
-                          fontSize: 32,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w700),
+        body: Stack(
+          children: [
+            Positioned(
+              bottom: 0,
+              left: 0,
+              child: Container(
+                width: size.width,
+                height: 80,
+                child: Stack(
+                  overflow: Overflow.visible,
+                  children: [
+                    CustomPaint(
+                      size: Size(size.width, 80),
+                      painter: BNBCustomPainter(),
                     ),
-                  ),
-                ],
-              ),
-              _buildTile(
-                Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text('Data Usage',
-                              style: TextStyle(color: Colors.blueAccent, fontSize: 16.0)),
-                          Text('400 Mb',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 32.0))
+                    Center(
+                      heightFactor: 0.6,
+                      child: FloatingActionButton(backgroundColor: Colors.black,
+                          child: Icon(FontAwesomeIcons.rupeeSign), elevation: 2, onPressed: () {}),
+                    ),
+                    Container(
+                      width: size.width,
+                      height: 80,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              Icons.home,
+                              size: 34,
+                              color: currentIndex == 0 ? Colors.black : Colors.grey.shade400,
+                            ),
+                            onPressed: () {
+                              setBottomBarIndex(0);
+                            },
+                            splashColor: Colors.white,
+                          ),
+                          IconButton(
+                              icon: Icon(
+                                Icons.notifications,
+                                size: 34,
+                                color: currentIndex == 3 ? Colors.black : Colors.black,
+                              ),
+                              onPressed: () {
+                                setBottomBarIndex(2);
+                              }),
                         ],
                       ),
-                      Material(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(24.0),
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Icon(Icons.timeline,
-                                color: Colors.white, size: 30.0),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    )
+                  ],
                 ),
               ),
-              _buildTile(
-                Padding(
+            ),
+            StaggeredGridView.count(
+              shrinkWrap: false,
+              crossAxisCount: 2,
+              crossAxisSpacing: 12.0,
+              mainAxisSpacing: 12.0,
+              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
+                      child: Text(
+                        "Hi John",
+                        style: TextStyle(
+                            fontSize: 32,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700),
+                      ),
+                    ),
+                  ],
+                ),
+                _buildTile(
+                  Padding(
                     padding: const EdgeInsets.all(24.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text('Usage Statistics',
-                                    style: TextStyle(color: Colors.green, fontSize: 16.0)),
-                                Text(' 24.5 Gb',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 32.0)),
-                              ],
-                            ),
-                            DropdownButton(
-                                isDense: true,
-                                value: actualDropdown,
-                                onChanged: (String value) => setState(() {
-                                      actualDropdown = value;
-                                      actualChart = chartDropdownItems
-                                          .indexOf(value); // Refresh the chart
-                                    }),
-                                items: chartDropdownItems.map((String title) {
-                                  return DropdownMenuItem(
-                                    value: title,
-                                    child: Text(title,
-                                        style: TextStyle(
-                                            color: Colors.blue,
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 14.0)),
-                                  );
-                                }).toList())
+                            Text('Data Usage',
+                                style: TextStyle(color: Colors.blueAccent, fontSize: 16.0)),
+                            Text('400 Mb',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 32.0))
                           ],
                         ),
-                        Padding(padding: EdgeInsets.only(bottom: 4.0)),
-                        Sparkline(
-                          data: charts[actualChart],
-                          lineWidth: 5.0,
-                          lineColor: Colors.greenAccent,
-                        )
+                        Material(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(24.0),
+                          child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Icon(Icons.timeline,
+                                  color: Colors.white, size: 30.0),
+                            ),
+                          ),
+                        ),
                       ],
-                    )),
-              ),
-            ],
-            staggeredTiles: [
-              StaggeredTile.extent(2, 55.0),
-              StaggeredTile.extent(2, 110.0),
-              StaggeredTile.extent(2, 220.0),
-            ],
-          ),
+                    ),
+                  ),
+                ),
+                _buildTile(
+                  Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text('Usage Statistics',
+                                      style: TextStyle(color: Colors.green, fontSize: 16.0)),
+                                  Text(' 24.5 Gb',
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 32.0)),
+                                ],
+                              ),
+                              DropdownButton(
+                                  isDense: true,
+                                  value: actualDropdown,
+                                  onChanged: (String value) => setState(() {
+                                        actualDropdown = value;
+                                        actualChart = chartDropdownItems
+                                            .indexOf(value); // Refresh the chart
+                                      }),
+                                  items: chartDropdownItems.map((String title) {
+                                    return DropdownMenuItem(
+                                      value: title,
+                                      child: Text(title,
+                                          style: TextStyle(
+                                              color: Colors.blue,
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 14.0)),
+                                    );
+                                  }).toList())
+                            ],
+                          ),
+                          Padding(padding: EdgeInsets.only(bottom: 4.0)),
+                          Sparkline(
+                            data: charts[actualChart],
+                            lineWidth: 5.0,
+                            lineColor: Colors.greenAccent,
+                          )
+                        ],
+                      )),
+                ),
+              ],
+              staggeredTiles: [
+                StaggeredTile.extent(2, 55.0),
+                StaggeredTile.extent(2, 110.0),
+                StaggeredTile.extent(2, 220.0),
+              ],
+            ),
+          ],
         ),
       ),
     );
@@ -417,4 +460,31 @@ Widget _buildTile(Widget child, {Function() onTap}) {
             print('Not set yet');
           },
           child: child));
+}
+
+class BNBCustomPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = new Paint()
+      ..color = Colors.white
+      ..style = PaintingStyle.fill;
+
+    Path path = Path();
+    path.moveTo(0, 20); // Start
+    path.quadraticBezierTo(size.width * 0.20, 0, size.width * 0.35, 0);
+    path.quadraticBezierTo(size.width * 0.40, 0, size.width * 0.40, 20);
+    path.arcToPoint(Offset(size.width * 0.60, 20), radius: Radius.circular(20.0), clockwise: false);
+    path.quadraticBezierTo(size.width * 0.60, 0, size.width * 0.65, 0);
+    path.quadraticBezierTo(size.width * 0.80, 0, size.width, 20);
+    path.lineTo(size.width, size.height);
+    path.lineTo(0, size.height);
+    path.lineTo(0, 20);
+    canvas.drawShadow(path, Colors.black, 5, true);
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
+  }
 }
