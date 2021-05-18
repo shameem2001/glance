@@ -234,7 +234,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                     backgroundColor: Colors.black,
                     side: BorderSide(
                         color: Colors.white, width: 1),
-                    elevation: 5,
+                    elevation: 20,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(12),
