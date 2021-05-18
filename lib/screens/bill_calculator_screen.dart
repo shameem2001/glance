@@ -41,7 +41,7 @@ class _BillCalculatorScreenState extends State<BillCalculatorScreen> {
               padding: EdgeInsets.symmetric(vertical: 28.0, horizontal: 15),
               physics: BouncingScrollPhysics(),
               crossAxisCount: 3,
-              crossAxisSpacing: 40.0,
+              crossAxisSpacing: 25.0,
               mainAxisSpacing: 12.0,
               shrinkWrap: true,
               children: [
@@ -166,7 +166,7 @@ Widget _buildTile(Widget child, {Function() onTap}) {
       elevation: 14.0,
       borderRadius: BorderRadius.circular(12.0),
       color: Colors.white,
-      shadowColor: Colors.grey,
+      shadowColor: Color(0x802196F3),
       child: InkWell(
         hoverColor: Colors.grey,
           // Do onTap() if it isn't null, otherwise do print()
