@@ -73,7 +73,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   elevation: 10,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: Container(
-                    height: MediaQuery.of(context).size.height - 300,
+                    height: 400,
                     width: MediaQuery.of(context).size.width - 50,
                     child: Padding(
                       padding:

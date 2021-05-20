@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.glance.glance">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="glance"
+        android:label="Glance"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
