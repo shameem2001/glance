@@ -362,7 +362,7 @@ class _HomePageState extends State<HomePage> {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
                           child: Text(
-                            " John",
+                            " Daliya",
                             style: GoogleFonts.raleway(
                                 fontSize: 32,
                                 color: Colors.black,
@@ -384,9 +384,9 @@ class _HomePageState extends State<HomePage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text('Data Usage',
+                            Text('Daily Usage',
                                 style: TextStyle(color: Colors.blueAccent, fontSize: 16.0)),
-                            Text('400 Mb',
+                            Text('18 units',
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w700,
@@ -425,7 +425,7 @@ class _HomePageState extends State<HomePage> {
                                 children: <Widget>[
                                   Text('Usage Statistics',
                                       style: TextStyle(color: Colors.green, fontSize: 16.0)),
-                                  Text(' 24.5 Gb',
+                                  Text(' 127 units',
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.w700,
