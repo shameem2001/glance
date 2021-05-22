@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:glance/screens/home_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PaymentsScreen extends StatefulWidget {
   static const String id = "payments_screen";
@@ -13,6 +15,29 @@ class PaymentsScreen extends StatefulWidget {
 }
 
 class _PaymentsScreenState extends State<PaymentsScreen> {
+
+  String uri = "https://wss.kseb.in/selfservices/quickpay";
+
+  int billAmount = 0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getBillAmount();
+  }
+
+  getBillAmount() async{
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    billAmount = sharedPreferences.getInt('calculatedBill');
+    print(billAmount);
+    setState(() {
+    });
+  }
+
+  void _launchURL() async =>
+      await canLaunch(uri) ? await launch(uri) : throw 'Could not launch $uri';
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -206,7 +231,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 5.0, horizontal: 12.0),
                                     child: Text(
-                                      'Amount: \$259',
+                                      'Amount: \$$billAmount',
                                       style: GoogleFonts.poppins(
                                         color: Colors.white,
                                         fontSize: 20.0,
@@ -241,8 +266,9 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                       ),
                     ),
                   ),
-                  onPressed: () {
+                  onPressed: () async{
                   //  google pay hyperlink.
+                    await _launchURL();
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(

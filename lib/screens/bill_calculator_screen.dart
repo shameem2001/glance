@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:glance/screens/home_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BillCalculatorScreen extends StatefulWidget {
   static const String id = "bill_calculator_screen";
-
   const BillCalculatorScreen({Key key}) : super(key: key);
 
   @override
@@ -13,7 +13,7 @@ class BillCalculatorScreen extends StatefulWidget {
 
 class _BillCalculatorScreenState extends State<BillCalculatorScreen> {
   double consumption;
-
+  int calculatedBill = 269;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -146,10 +146,17 @@ class _BillCalculatorScreenState extends State<BillCalculatorScreen> {
                       fontWeight: FontWeight.w600,
                       fontSize: 22.0),),
                   SizedBox(width: 10,),
-                  Text("\$259", style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 22.0),),
+                  GestureDetector(
+                    onTap: () async{
+                      print("pressed");
+                      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+                      sharedPreferences.setInt('calculatedBill', calculatedBill);
+                    },
+                    child: Text("\$$calculatedBill", style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 22.0),),
+                  ),
                 ],
               ),
               

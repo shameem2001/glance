@@ -324,15 +324,15 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             actions: [
-              IconButton(
-                  icon: Icon(
-                    Icons.notifications_none_outlined,
-                    color: Colors.black,
-                    size: 30,
-                  ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, NotificationScreen.id);
-                  }),
+              // IconButton(
+              //     icon: Icon(
+              //       Icons.notifications_none_outlined,
+              //       color: Colors.black,
+              //       size: 30,
+              //     ),
+              //     onPressed: () {
+              //       // Navigator.pushNamed(context, NotificationScreen.id);
+              //     }),
             ]),
         body: Stack(
           children: [
