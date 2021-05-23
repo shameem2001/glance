@@ -22,7 +22,7 @@ class _BillCalculatorScreenState extends State<BillCalculatorScreen> {
   List appliance2 = ['Light', 20, 8, 6];
   List appliance3 = ['TV', 80, 1, 4];
   int calculatedBill = 0;
-
+  double consumption = 0;
 
   List rows = [
   {"appliance": 'Fan', "power":"50W","count":'2',"time":'8'},
@@ -195,21 +195,24 @@ class _BillCalculatorScreenState extends State<BillCalculatorScreen> {
               ),
               onPressed: () async{
                 SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-                List _power = [int.parse(sharedPreferences.getString('power1')), int.parse(sharedPreferences.getString('power2')), int.parse(sharedPreferences.getString('power3'))];
-                List _count = [int.parse(sharedPreferences.getString('count1')), int.parse(sharedPreferences.getString('count2')), int.parse(sharedPreferences.getString('count3'))];
-                List _time = [int.parse(sharedPreferences.getString('time1')), int.parse(sharedPreferences.getString('time2')), int.parse(sharedPreferences.getString('time3'))];
+                List _power = [double.parse(sharedPreferences.getString('power1')), double.parse(sharedPreferences.getString('power2')), double.parse(sharedPreferences.getString('power3'))];
+                List _count = [double.parse(sharedPreferences.getString('count1')), double.parse(sharedPreferences.getString('count2')), double.parse(sharedPreferences.getString('count3'))];
+                List _time = [double.parse(sharedPreferences.getString('time1')), double.parse(sharedPreferences.getString('time2')), double.parse(sharedPreferences.getString('time3'))];
 
                 for(int index = 0; index < 3; index++) {
-                  int power = _power[index];
-                  int count = _count[index];
-                  int time = _time[index];
+                  double power = _power[index];
+                  double count = _count[index];
+                  double time = _time[index];
                   print(power);
                   print(count);
                   print(time);
                   print(power*count*time*6);
-                  calculatedBill += (power * count * time * 6);
+                  consumption += (power * count * time * 6);
                 }
-                calculatedBill = calculatedBill ~/ 1000;
+                consumption = consumption / 1000;
+                print(consumption);
+                calculatedBill = (consumption * 6.75).toInt() + 600;
+                print(calculatedBill);
                 sharedPreferences.setInt(
                     'calculatedBill', calculatedBill);
                 setState(() {});
