@@ -20,11 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildPhoto() {
     return Container(
       height: 150,
-      decoration:BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/glance2.jpg'),
-        )
-      )
+      child: Image.asset('assets/app_icon.png'),
     );
   }
 

@@ -26,7 +26,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
-                    child: Image.asset('assets/glance2.jpg'),
+                    child: Image.asset('assets/app_icon.png'),
                     height: 200,
                   ),
                 ),

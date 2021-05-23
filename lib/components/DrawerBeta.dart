@@ -36,8 +36,9 @@ class DrawerBetaState extends State<DrawerBeta> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                currentAccountPicture: CircleAvatar(
-                  backgroundImage: AssetImage('assets/glance2.jpg'),
+                currentAccountPicture: Container(
+                  height: 60,
+                  child: Image.asset('assets/app_icon.png'),
                 ),
                 decoration: BoxDecoration(color: Colors.white),
               ),

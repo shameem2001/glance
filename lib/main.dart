@@ -22,7 +22,7 @@ class Glance extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(primaryColor: Colors.black,),
       debugShowCheckedModeBanner: false,
-      initialRoute: HomePage.id,
+      initialRoute: BillCalculatorScreen.id,
       routes: {
         SplashScreen.id: (context) => SplashScreen(),
         WelcomeScreen.id: (context) => WelcomeScreen(),

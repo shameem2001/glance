@@ -46,8 +46,8 @@ class _SplashScreenState extends State<SplashScreen> {
                         children: <Widget>[
                           Container(
                             child: Image.asset(
-                              'assets/glance2.jpg',
-                              scale: 1,
+                              'assets/app_icon.png',
+                              scale: 4,
                             ),
                           ),
                           Padding(

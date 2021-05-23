@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:editable/editable.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:glance/components/data_table_custom/editable_page.dart';
 import 'package:glance/screens/home_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,8 +16,24 @@ class BillCalculatorScreen extends StatefulWidget {
 }
 
 class _BillCalculatorScreenState extends State<BillCalculatorScreen> {
-  double consumption;
+  List appliance1 = ['Fan', 50, 2, 8];
+  List appliance2 = ['Light', 20, 8, 6];
+  List appliance3 = ['TV', 80, 1, 4];
   int calculatedBill = 0;
+
+
+  List rows = [
+  {"appliance": 'Fan', "power":"50W","count":'2',"time":'8'},
+  {"appliance": 'Light',"power":'20W',"count":'8',"time":'6'},
+  {"appliance": 'TV', "power":'80W',"count":'1',"time":'4'},
+  ];
+//Headers or Columns
+  List headers = [
+  {"title":'Appliance', "index": 1, "key":'appliance'},
+  {"title":'Power', "index": 2, "key":'power'},
+  {"title":'Count', "index": 3, "key":'count'},
+  {"title":'Time', "index": 4, "key":'time'},
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -52,70 +70,95 @@ class _BillCalculatorScreenState extends State<BillCalculatorScreen> {
               crossAxisCount: 2,
               crossAxisSpacing: 12.0,
               mainAxisSpacing: 12.0,
-              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              padding: EdgeInsets.fromLTRB(0.0, 8.0, 20.0, 8.0),
               children: [
-                _buildTile( DataTable(
-                  headingTextStyle: TextStyle(
-                      color: Colors.black,
-                  ),
-                  dataTextStyle: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16
-                  ),
-                    columns: <DataColumn>[
-                      DataColumn(
-                        label: Text(
-                          'Appliance',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'Power',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'Count',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'Time',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ],
-                    rows: <DataRow>[
-                      DataRow(
-                        cells: <DataCell>[
-                          DataCell(Text('Fan')),
-                          DataCell(Text('50W')),
-                          DataCell(Text('2')),
-                          DataCell(Text('8')),
-                        ],
-                      ),
-                      DataRow(
-                        cells: <DataCell>[
-                          DataCell(Text('Light')),
-                          DataCell(Text('20W')),
-                          DataCell(Text('8')),
-                          DataCell(Text('6')),
-                        ],
-                      ),
-                      DataRow(
-                        cells: <DataCell>[
-                          DataCell(Text('TV')),
-                          DataCell(Text('80W')),
-                          DataCell(Text('1')),
-                          DataCell(Text('4')),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+                Center(child: EditablePage()),
+                // _buildTile(
+                //   Center(
+                //     child: Editable(
+                //       onSubmitted: (value){
+                //         print(value);
+                //         print(rows[0]['power']);
+                //       },
+                //       onRowSaved: (value){ //added line
+                //         print(value);
+                //         print(rows[0]['power']);//prints to console
+                //       },
+                //       thAlignment: TextAlign.center,
+                //       thStyle: TextStyle(fontWeight: FontWeight.bold),
+                //       thSize: 15,
+                //       columns: headers,
+                //       rows: rows,
+                //       showCreateButton: true,
+                //       tdStyle: TextStyle(fontSize: 15),
+                //       tdAlignment: TextAlign.center,
+                //       showSaveIcon: false,
+                //       borderColor: Colors.white,
+                //       borderWidth: 0.0,
+                //     ),
+                //   ),
+                  // DataTable(
+                  // headingTextStyle: TextStyle(
+                  //     color: Colors.black,
+                  // ),
+                  // dataTextStyle: TextStyle(
+                  //     color: Colors.black,
+                  //     fontSize: 16
+                  // ),
+                  //   columns: <DataColumn>[
+                  //     DataColumn(
+                  //       label: Text(
+                  //         'Appliance',
+                  //         style: TextStyle(fontWeight: FontWeight.bold),
+                  //       ),
+                  //     ),
+                  //     DataColumn(
+                  //       label: Text(
+                  //         'Power',
+                  //         style: TextStyle(fontWeight: FontWeight.bold),
+                  //       ),
+                  //     ),
+                  //     DataColumn(
+                  //       label: Text(
+                  //         'Count',
+                  //         style: TextStyle(fontWeight: FontWeight.bold),
+                  //       ),
+                  //     ),
+                  //     DataColumn(
+                  //       label: Text(
+                  //         'Time',
+                  //         style: TextStyle(fontWeight: FontWeight.bold),
+                  //       ),
+                  //     ),
+                  //   ],
+                  //   rows: <DataRow>[
+                  //     DataRow(
+                  //       cells: <DataCell>[
+                  //         DataCell(Text(appliance1[0]),),
+                  //         DataCell(Text('${appliance1[1].toString()}W')),
+                  //         DataCell(Text(appliance1[2].toString())),
+                  //         DataCell(Text(appliance1[3].toString())),
+                  //       ],
+                  //     ),
+                  //     DataRow(
+                  //       cells: <DataCell>[
+                  //         DataCell(Text(appliance2[0])),
+                  //         DataCell(Text('${appliance2[1].toString()}W')),
+                  //         DataCell(Text(appliance2[2].toString())),
+                  //         DataCell(Text(appliance2[3].toString())),
+                  //       ],
+                  //     ),
+                  //     DataRow(
+                  //       cells: <DataCell>[
+                  //         DataCell(Text(appliance3[0])),
+                  //         DataCell(Text('${appliance3[1].toString()}W')),
+                  //         DataCell(Text(appliance3[2].toString())),
+                  //         DataCell(Text(appliance3[3].toString())),
+                  //       ],
+                  //     ),
+                  //   ],
+                  // ),
+                //),
               ],
               staggeredTiles: [
                 StaggeredTile.extent(2, 200.0),
@@ -186,7 +229,7 @@ class _BillCalculatorScreenState extends State<BillCalculatorScreen> {
                     children: [
                       Text(
                         "Estimated Bill Amount:",
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                             color: Colors.black,
                             fontWeight: FontWeight.w600,
                             fontSize: 18.0),
@@ -203,7 +246,7 @@ class _BillCalculatorScreenState extends State<BillCalculatorScreen> {
                         children: [
                           Text(
                             "₹ $calculatedBill",
-                            style: TextStyle(
+                            style: GoogleFonts.poppins(
                                 color: Colors.black,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 20.0),
