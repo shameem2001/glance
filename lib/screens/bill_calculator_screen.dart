@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:editable/editable.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:glance/components/data_table_custom/dummy_users.dart';
 import 'package:glance/components/data_table_custom/editable_page.dart';
+import 'package:glance/models/table_appliances.dart';
 import 'package:glance/screens/home_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,6 +36,15 @@ class _BillCalculatorScreenState extends State<BillCalculatorScreen> {
   {"title":'Count', "index": 3, "key":'count'},
   {"title":'Time', "index": 4, "key":'time'},
   ];
+
+  List<Appliances> applianceObject;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setDatas();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +83,8 @@ class _BillCalculatorScreenState extends State<BillCalculatorScreen> {
               mainAxisSpacing: 12.0,
               padding: EdgeInsets.fromLTRB(0.0, 8.0, 20.0, 8.0),
               children: [
-                Center(child: EditablePage()),
+                Center(
+                    child: EditablePage()),
                 // _buildTile(
                 //   Center(
                 //     child: Editable(
@@ -182,9 +194,22 @@ class _BillCalculatorScreenState extends State<BillCalculatorScreen> {
                 ),
               ),
               onPressed: () async{
-                calculatedBill = 269;
-                SharedPreferences sharedPreferences =
-                await SharedPreferences.getInstance();
+                SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+                List _power = [int.parse(sharedPreferences.getString('power1')), int.parse(sharedPreferences.getString('power2')), int.parse(sharedPreferences.getString('power3'))];
+                List _count = [int.parse(sharedPreferences.getString('count1')), int.parse(sharedPreferences.getString('count2')), int.parse(sharedPreferences.getString('count3'))];
+                List _time = [int.parse(sharedPreferences.getString('time1')), int.parse(sharedPreferences.getString('time2')), int.parse(sharedPreferences.getString('time3'))];
+
+                for(int index = 0; index < 3; index++) {
+                  int power = _power[index];
+                  int count = _count[index];
+                  int time = _time[index];
+                  print(power);
+                  print(count);
+                  print(time);
+                  print(power*count*time*6);
+                  calculatedBill += (power * count * time * 6);
+                }
+                calculatedBill = calculatedBill ~/ 1000;
                 sharedPreferences.setInt(
                     'calculatedBill', calculatedBill);
                 setState(() {});
