@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:glance/screens/register_screen.dart';
+import 'package:glance/screens/welcome_screen.dart';
 import 'login_screen.dart';
 
 class EnterDetailsScreen extends StatefulWidget {
@@ -211,55 +212,67 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: AnnotatedRegion<SystemUiOverlayStyle>(
-          value: SystemUiOverlayStyle.light,
-          child : GestureDetector(
-            onTap: () => FocusScope.of(context).unfocus(),
-            child: Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical:20.0, horizontal: 40.0),
-                  child: SingleChildScrollView(
-                    physics: AlwaysScrollableScrollPhysics(),
-                    child: Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            'Enter Details',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'OpenSans',
-                              fontSize: 30.0,
-                              fontWeight: FontWeight.bold,
+    return WillPopScope(
+      onWillPop: () async {
+        if(Navigator.canPop(context)){
+          Navigator.pop(context);
+          return true;
+        }
+        else{
+          Navigator.popAndPushNamed(context, WelcomeScreen.id);
+          return false;
+        }
+      },
+      child: SafeArea(
+        child: Scaffold(
+          body: AnnotatedRegion<SystemUiOverlayStyle>(
+            value: SystemUiOverlayStyle.light,
+            child : GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(),
+              child: Stack(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical:20.0, horizontal: 40.0),
+                    child: SingleChildScrollView(
+                      physics: AlwaysScrollableScrollPhysics(),
+                      child: Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              'Enter Details',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'OpenSans',
+                                fontSize: 30.0,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          SizedBox(height: 30.0),
-                          _buildUsernameTF(),
-                          SizedBox(
-                            height: 30.0,
-                          ),
-                          _buildPhoneTF(),
-                          SizedBox(
-                            height: 30.0,
-                          ),
-                          _buildSubscriptionNoTF(),
-                          SizedBox(
-                            height: 30.0,
-                          ),
-                          _buildAddressTF(),
-                          SizedBox(
-                            height: 30.0,
-                          ),
-                          _buildRegisterBtn(),
-                        ],
+                            SizedBox(height: 30.0),
+                            _buildUsernameTF(),
+                            SizedBox(
+                              height: 30.0,
+                            ),
+                            _buildPhoneTF(),
+                            SizedBox(
+                              height: 30.0,
+                            ),
+                            _buildSubscriptionNoTF(),
+                            SizedBox(
+                              height: 30.0,
+                            ),
+                            _buildAddressTF(),
+                            SizedBox(
+                              height: 30.0,
+                            ),
+                            _buildRegisterBtn(),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

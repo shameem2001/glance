@@ -1,7 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:glance/components/google_sign_in_button.dart';
 import 'package:glance/screens/home_page.dart';
+import 'package:glance/screens/welcome_screen.dart';
+import 'package:glance/utils/authentication.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = "login_screen";
@@ -13,6 +19,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  Authentication authentication;
+
   bool _rememberMe = false;
   String username;
   String password;
@@ -38,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
           decoration: kBoxDecorationStyle,
           height: 60.0,
           child: TextField(
-            onSubmitted: (value){
+            onSubmitted: (value) {
               username = value;
             },
             keyboardType: TextInputType.emailAddress,
@@ -76,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
           decoration: kBoxDecorationStyle,
           height: 60.0,
           child: TextField(
-            onSubmitted: (value){
+            onSubmitted: (value) {
               password = value;
             },
             obscureText: true,
@@ -188,9 +196,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildSocialBtn() {
     return GestureDetector(
-      onTap: (){},
+      onTap: ()  {
+      },
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 20,),
+        margin: EdgeInsets.symmetric(
+          vertical: 20,
+        ),
         height: 60.0,
         width: 60.0,
         decoration: BoxDecoration(
@@ -214,40 +225,70 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: AnnotatedRegion<SystemUiOverlayStyle>(
-          value: SystemUiOverlayStyle.light,
-          child : GestureDetector(
-            onTap: () => FocusScope.of(context).unfocus(),
-            child: Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical:20.0, horizontal: 40.0),
-                  child: SingleChildScrollView(
-                    physics: AlwaysScrollableScrollPhysics(),
-                    child: Container(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              _buildPhoto(),
-                              SizedBox(height: 30.0),
-                              _buildEmailTF(),
-                              SizedBox(
-                                height: 30.0,
-                              ),
-                              _buildPasswordTF(),
-                              _buildForgotPasswordBtn(),
-                              _buildRememberMeCheckbox(),
-                              _buildLoginBtn(),
-                              _buildSignInWithText(),
-                              _buildSocialBtn(),
-                            ],
-                          ),
+    return WillPopScope(
+      onWillPop: () async {
+        if(Navigator.canPop(context)){
+          Navigator.pop(context);
+          return true;
+        }
+        else{
+          Navigator.popAndPushNamed(context, WelcomeScreen.id);
+          return false;
+        }
+      },
+      child: SafeArea(
+        child: Scaffold(
+          body: AnnotatedRegion<SystemUiOverlayStyle>(
+            value: SystemUiOverlayStyle.light,
+            child: GestureDetector(
+              onTap: () => FocusScope.of(context).unfocus(),
+              child: Stack(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 20.0, horizontal: 40.0),
+                    child: SingleChildScrollView(
+                      physics: AlwaysScrollableScrollPhysics(),
+                      child: Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            _buildPhoto(),
+                            SizedBox(height: 30.0),
+                            _buildEmailTF(),
+                            SizedBox(
+                              height: 30.0,
+                            ),
+                            _buildPasswordTF(),
+                            _buildForgotPasswordBtn(),
+                            _buildRememberMeCheckbox(),
+                            _buildLoginBtn(),
+                            _buildSignInWithText(),
+                            // _buildSocialBtn(),
+                            FutureBuilder(
+                              future: Authentication.initializeFirebase(
+                                  context: context),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasError) {
+                                  return Text('Error initializing Firebase');
+                                } else if (snapshot.connectionState ==
+                                    ConnectionState.done) {
+                                  return GoogleSignInButton();
+                                }
+                                return CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    Colors.black,
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
                         ),
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

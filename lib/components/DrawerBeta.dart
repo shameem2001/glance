@@ -2,6 +2,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:glance/utils/authentication.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class DrawerBeta extends StatefulWidget {
@@ -11,6 +13,9 @@ class DrawerBeta extends StatefulWidget {
 }
 
 class DrawerBetaState extends State<DrawerBeta> {
+
+  bool _isSigningOut = false;
+
   Color primaryColour = Colors.black;
   @override
   Widget build(BuildContext context) {
@@ -51,12 +56,25 @@ class DrawerBetaState extends State<DrawerBeta> {
                     fontWeight: FontWeight.w800),),
               ),
               Divider(height: 10,thickness: 1,),
-              ListTile(
-                leading: Icon(Icons.logout,color: primaryColour,),
-                title: Text('Logout',style: TextStyle(
-                    fontFamily: "Montserrat",
-                    fontSize: 15,
-                    fontWeight: FontWeight.w800),),
+              GestureDetector(
+                onTap: () async{
+                  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+                  setState(() {
+                    _isSigningOut = true;
+                  });
+                  await Authentication.signOut(context: context);
+                  sharedPreferences.setBool('isLoggedIn', false);
+                  setState(() {
+                    _isSigningOut = false;
+                  });
+                },
+                child: ListTile(
+                  leading: Icon(Icons.logout,color: primaryColour,),
+                  title: Text('Logout',style: TextStyle(
+                      fontFamily: "Montserrat",
+                      fontSize: 15,
+                      fontWeight: FontWeight.w800),),
+                ),
               ),
               SizedBox(height: 70,)
             ],

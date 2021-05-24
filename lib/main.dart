@@ -1,3 +1,4 @@
+import 'package:double_back_to_close/double_back_to_close.dart';
 import 'package:flutter/material.dart';
 import 'package:glance/screens/bill_calculator_screen.dart';
 import 'package:glance/screens/enter_details_screen.dart';
@@ -10,26 +11,33 @@ import 'package:glance/screens/register_screen.dart';
 import 'package:glance/screens/splash_screen.dart';
 import 'package:glance/screens/welcome_screen.dart';
 
-
 void main() {
   runApp(Glance());
 }
+
 class Glance extends StatelessWidget {
   const Glance({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(primaryColor: Colors.black,),
+      theme: ThemeData(
+        primaryColor: Colors.black,
+      ),
       debugShowCheckedModeBanner: false,
       initialRoute: SplashScreen.id,
       routes: {
         SplashScreen.id: (context) => SplashScreen(),
-        WelcomeScreen.id: (context) => WelcomeScreen(),
+        WelcomeScreen.id: (context) => DoubleBack(
+              message: "Press back again to exit",
+              child: WelcomeScreen(),
+            ),
         LoginScreen.id: (context) => LoginScreen(),
         EnterDetailsScreen.id: (context) => EnterDetailsScreen(),
         RegisterScreen.id: (context) => RegisterScreen(),
-        HomePage.id: (context) => HomePage(),
+        HomePage.id: (context) => DoubleBack(
+            message: "Press back again to exit",
+            child: HomePage(),),
         ProfileScreen.id: (context) => ProfileScreen(),
         PaymentsScreen.id: (context) => PaymentsScreen(),
         BillCalculatorScreen.id: (context) => BillCalculatorScreen(),

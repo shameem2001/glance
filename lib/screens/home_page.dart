@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:glance/components/DrawerBeta.dart';
@@ -14,12 +15,16 @@ class HomePage extends StatefulWidget {
   static const String id = "home_page";
   int currentPage = 0;
   GlobalKey bottomNavigationKey = GlobalKey();
+  User user;
+  HomePage({this.user});
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  User user;
+  _HomePageState({this.user});
 
   @override
   void dispose() {
@@ -252,6 +257,12 @@ class _HomePageState extends State<HomePage> {
       else if(currentIndex == 2)
         Navigator.pushReplacementNamed(context, ProfileScreen.id);
     });
+  }
+
+  @override
+  void initState() {
+    user = widget.user;
+    super.initState();
   }
 
   @override

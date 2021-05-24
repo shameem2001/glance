@@ -1,7 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:glance/screens/home_page.dart';
 import 'package:glance/screens/welcome_screen.dart';
+import 'package:glance/utils/authentication.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'login_screen.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -19,8 +24,19 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 3),
-            () => Navigator.pushReplacementNamed(context, WelcomeScreen.id));
+    var duration = Duration(
+      seconds: 3,
+    );
+    Timer(duration, () async {
+      SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+      if(sharedPreferences.get("isSignedIn") == null)
+        sharedPreferences.setBool("isSignedIn", false);
+      if (sharedPreferences.get("isSignedIn"))
+        Authentication.initializeFirebase(context: context);
+      else
+        Navigator.pushReplacementNamed(context, WelcomeScreen.id);
+    });
   }
 
   @override
