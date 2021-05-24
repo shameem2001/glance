@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:editable/editable.dart';
+// import 'package:editable/editable.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:glance/components/data_table_custom/dummy_users.dart';
 import 'package:glance/components/data_table_custom/editable_page.dart';
@@ -25,16 +25,16 @@ class _BillCalculatorScreenState extends State<BillCalculatorScreen> {
   double consumption = 0;
 
   List rows = [
-  {"appliance": 'Fan', "power":"50W","count":'2',"time":'8'},
-  {"appliance": 'Light',"power":'20W',"count":'8',"time":'6'},
-  {"appliance": 'TV', "power":'80W',"count":'1',"time":'4'},
+    {"appliance": 'Fan', "power": "50W", "count": '2', "time": '8'},
+    {"appliance": 'Light', "power": '20W', "count": '8', "time": '6'},
+    {"appliance": 'TV', "power": '80W', "count": '1', "time": '4'},
   ];
 //Headers or Columns
   List headers = [
-  {"title":'Appliance', "index": 1, "key":'appliance'},
-  {"title":'Power', "index": 2, "key":'power'},
-  {"title":'Count', "index": 3, "key":'count'},
-  {"title":'Time', "index": 4, "key":'time'},
+    {"title": 'Appliance', "index": 1, "key": 'appliance'},
+    {"title": 'Power', "index": 2, "key": 'power'},
+    {"title": 'Count', "index": 3, "key": 'count'},
+    {"title": 'Time', "index": 4, "key": 'time'},
   ];
 
   List<Appliances> applianceObject;
@@ -75,7 +75,9 @@ class _BillCalculatorScreenState extends State<BillCalculatorScreen> {
         ),
         body: Column(
           children: [
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             StaggeredGridView.count(
               shrinkWrap: true,
               crossAxisCount: 2,
@@ -83,8 +85,7 @@ class _BillCalculatorScreenState extends State<BillCalculatorScreen> {
               mainAxisSpacing: 12.0,
               padding: EdgeInsets.fromLTRB(0.0, 8.0, 20.0, 8.0),
               children: [
-                Center(
-                    child: EditablePage()),
+                Center(child: EditablePage()),
                 // _buildTile(
                 //   Center(
                 //     child: Editable(
@@ -109,67 +110,67 @@ class _BillCalculatorScreenState extends State<BillCalculatorScreen> {
                 //       borderWidth: 0.0,
                 //     ),
                 //   ),
-                  // DataTable(
-                  // headingTextStyle: TextStyle(
-                  //     color: Colors.black,
-                  // ),
-                  // dataTextStyle: TextStyle(
-                  //     color: Colors.black,
-                  //     fontSize: 16
-                  // ),
-                  //   columns: <DataColumn>[
-                  //     DataColumn(
-                  //       label: Text(
-                  //         'Appliance',
-                  //         style: TextStyle(fontWeight: FontWeight.bold),
-                  //       ),
-                  //     ),
-                  //     DataColumn(
-                  //       label: Text(
-                  //         'Power',
-                  //         style: TextStyle(fontWeight: FontWeight.bold),
-                  //       ),
-                  //     ),
-                  //     DataColumn(
-                  //       label: Text(
-                  //         'Count',
-                  //         style: TextStyle(fontWeight: FontWeight.bold),
-                  //       ),
-                  //     ),
-                  //     DataColumn(
-                  //       label: Text(
-                  //         'Time',
-                  //         style: TextStyle(fontWeight: FontWeight.bold),
-                  //       ),
-                  //     ),
-                  //   ],
-                  //   rows: <DataRow>[
-                  //     DataRow(
-                  //       cells: <DataCell>[
-                  //         DataCell(Text(appliance1[0]),),
-                  //         DataCell(Text('${appliance1[1].toString()}W')),
-                  //         DataCell(Text(appliance1[2].toString())),
-                  //         DataCell(Text(appliance1[3].toString())),
-                  //       ],
-                  //     ),
-                  //     DataRow(
-                  //       cells: <DataCell>[
-                  //         DataCell(Text(appliance2[0])),
-                  //         DataCell(Text('${appliance2[1].toString()}W')),
-                  //         DataCell(Text(appliance2[2].toString())),
-                  //         DataCell(Text(appliance2[3].toString())),
-                  //       ],
-                  //     ),
-                  //     DataRow(
-                  //       cells: <DataCell>[
-                  //         DataCell(Text(appliance3[0])),
-                  //         DataCell(Text('${appliance3[1].toString()}W')),
-                  //         DataCell(Text(appliance3[2].toString())),
-                  //         DataCell(Text(appliance3[3].toString())),
-                  //       ],
-                  //     ),
-                  //   ],
-                  // ),
+                // DataTable(
+                // headingTextStyle: TextStyle(
+                //     color: Colors.black,
+                // ),
+                // dataTextStyle: TextStyle(
+                //     color: Colors.black,
+                //     fontSize: 16
+                // ),
+                //   columns: <DataColumn>[
+                //     DataColumn(
+                //       label: Text(
+                //         'Appliance',
+                //         style: TextStyle(fontWeight: FontWeight.bold),
+                //       ),
+                //     ),
+                //     DataColumn(
+                //       label: Text(
+                //         'Power',
+                //         style: TextStyle(fontWeight: FontWeight.bold),
+                //       ),
+                //     ),
+                //     DataColumn(
+                //       label: Text(
+                //         'Count',
+                //         style: TextStyle(fontWeight: FontWeight.bold),
+                //       ),
+                //     ),
+                //     DataColumn(
+                //       label: Text(
+                //         'Time',
+                //         style: TextStyle(fontWeight: FontWeight.bold),
+                //       ),
+                //     ),
+                //   ],
+                //   rows: <DataRow>[
+                //     DataRow(
+                //       cells: <DataCell>[
+                //         DataCell(Text(appliance1[0]),),
+                //         DataCell(Text('${appliance1[1].toString()}W')),
+                //         DataCell(Text(appliance1[2].toString())),
+                //         DataCell(Text(appliance1[3].toString())),
+                //       ],
+                //     ),
+                //     DataRow(
+                //       cells: <DataCell>[
+                //         DataCell(Text(appliance2[0])),
+                //         DataCell(Text('${appliance2[1].toString()}W')),
+                //         DataCell(Text(appliance2[2].toString())),
+                //         DataCell(Text(appliance2[3].toString())),
+                //       ],
+                //     ),
+                //     DataRow(
+                //       cells: <DataCell>[
+                //         DataCell(Text(appliance3[0])),
+                //         DataCell(Text('${appliance3[1].toString()}W')),
+                //         DataCell(Text(appliance3[2].toString())),
+                //         DataCell(Text(appliance3[3].toString())),
+                //       ],
+                //     ),
+                //   ],
+                // ),
                 //),
               ],
               staggeredTiles: [
@@ -184,8 +185,7 @@ class _BillCalculatorScreenState extends State<BillCalculatorScreen> {
                 shadowColor: Color(0x802196F3),
                 primary: Colors.white,
                 backgroundColor: Colors.black,
-                side: BorderSide(
-                    color: Colors.white, width: 1),
+                side: BorderSide(color: Colors.white, width: 1),
                 elevation: 10,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
@@ -193,33 +193,45 @@ class _BillCalculatorScreenState extends State<BillCalculatorScreen> {
                   ),
                 ),
               ),
-              onPressed: () async{
-                SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-                List _power = [double.parse(sharedPreferences.getString('power1')), double.parse(sharedPreferences.getString('power2')), double.parse(sharedPreferences.getString('power3'))];
-                List _count = [double.parse(sharedPreferences.getString('count1')), double.parse(sharedPreferences.getString('count2')), double.parse(sharedPreferences.getString('count3'))];
-                List _time = [double.parse(sharedPreferences.getString('time1')), double.parse(sharedPreferences.getString('time2')), double.parse(sharedPreferences.getString('time3'))];
+              onPressed: () async {
+                SharedPreferences sharedPreferences =
+                    await SharedPreferences.getInstance();
+                List _power = [
+                  double.parse(sharedPreferences.getString('power1')),
+                  double.parse(sharedPreferences.getString('power2')),
+                  double.parse(sharedPreferences.getString('power3'))
+                ];
+                List _count = [
+                  double.parse(sharedPreferences.getString('count1')),
+                  double.parse(sharedPreferences.getString('count2')),
+                  double.parse(sharedPreferences.getString('count3'))
+                ];
+                List _time = [
+                  double.parse(sharedPreferences.getString('time1')),
+                  double.parse(sharedPreferences.getString('time2')),
+                  double.parse(sharedPreferences.getString('time3'))
+                ];
 
-                for(int index = 0; index < 3; index++) {
+                for (int index = 0; index < 3; index++) {
                   double power = _power[index];
                   double count = _count[index];
                   double time = _time[index];
                   print(power);
                   print(count);
                   print(time);
-                  print(power*count*time*6);
+                  print(power * count * time * 6);
                   consumption += (power * count * time * 6);
                 }
                 consumption = consumption / 1000;
                 print(consumption);
-                calculatedBill = (consumption * 6.75).toInt() + 600;
+                calculatedBill = (consumption * 6.75).toInt() + 110;
                 print(calculatedBill);
-                sharedPreferences.setInt(
-                    'calculatedBill', calculatedBill);
+                sharedPreferences.setInt('calculatedBill', calculatedBill);
                 setState(() {});
               },
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 5.0, horizontal: 12.0),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 12.0),
                 child: Text(
                   'Calculate',
                   style: GoogleFonts.poppins(

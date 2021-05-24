@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:glance/components/DrawerBeta.dart';
-import 'package:glance/screens/notification_screen.dart';
 import 'package:glance/screens/payments_screen.dart';
 import 'package:glance/screens/profile_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,12 +19,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
   }
+
   final List<List<double>> charts = [
     [
       0.0,
@@ -245,11 +244,11 @@ class _HomePageState extends State<HomePage> {
   setBottomBarIndex(index) {
     setState(() {
       currentIndex = index;
-      if(currentIndex == 0)
+      if (currentIndex == 0)
         Navigator.pushReplacementNamed(context, BillCalculatorScreen.id);
-      else if(currentIndex == 1)
+      else if (currentIndex == 1)
         Navigator.pushReplacementNamed(context, PaymentsScreen.id);
-      else if(currentIndex == 2)
+      else if (currentIndex == 2)
         Navigator.pushReplacementNamed(context, ProfileScreen.id);
     });
   }
@@ -265,7 +264,7 @@ class _HomePageState extends State<HomePage> {
           width: size.width,
           height: 80,
           child: Stack(
-            overflow: Overflow.visible,
+            clipBehavior: Clip.none,
             children: [
               CustomPaint(
                 size: Size(size.width, 80),
@@ -273,8 +272,12 @@ class _HomePageState extends State<HomePage> {
               ),
               Center(
                 heightFactor: 0.6,
-                child: FloatingActionButton(backgroundColor: Colors.black,
-                    child: Icon(FontAwesomeIcons.rupeeSign, size: 30,),
+                child: FloatingActionButton(
+                    backgroundColor: Colors.black,
+                    child: Icon(
+                      FontAwesomeIcons.rupeeSign,
+                      size: 30,
+                    ),
                     elevation: 2,
                     onPressed: () {
                       setBottomBarIndex(1);
@@ -292,7 +295,9 @@ class _HomePageState extends State<HomePage> {
                         icon: Icon(
                           FontAwesomeIcons.receipt,
                           size: 32,
-                          color: currentIndex == 0 ? Colors.black : Colors.grey.shade400,
+                          color: currentIndex == 0
+                              ? Colors.black
+                              : Colors.grey.shade400,
                         ),
                         onPressed: () {
                           print("Pressed");
@@ -307,7 +312,8 @@ class _HomePageState extends State<HomePage> {
                           icon: Icon(
                             FontAwesomeIcons.solidUser,
                             size: 32,
-                            color: currentIndex == 3 ? Colors.black : Colors.black,
+                            color:
+                                currentIndex == 3 ? Colors.black : Colors.black,
                           ),
                           onPressed: () {
                             setBottomBarIndex(2);
@@ -383,9 +389,10 @@ class _HomePageState extends State<HomePage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text('Daily Usage',
-                                style: TextStyle(color: Colors.blueAccent, fontSize: 16.0)),
-                            Text('18 units',
+                            Text('Average Daily Usage',
+                                style: TextStyle(
+                                    color: Colors.blueAccent, fontSize: 16.0)),
+                            Text('4 units',
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w700,
@@ -423,8 +430,9 @@ class _HomePageState extends State<HomePage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text('Usage Statistics',
-                                      style: TextStyle(color: Colors.green, fontSize: 16.0)),
-                                  Text(' 127 units',
+                                      style: TextStyle(
+                                          color: Colors.green, fontSize: 16.0)),
+                                  Text('29 units',
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.w700,
@@ -436,8 +444,9 @@ class _HomePageState extends State<HomePage> {
                                   value: actualDropdown,
                                   onChanged: (String value) => setState(() {
                                         actualDropdown = value;
-                                        actualChart = chartDropdownItems
-                                            .indexOf(value); // Refresh the chart
+                                        actualChart =
+                                            chartDropdownItems.indexOf(
+                                                value); // Refresh the chart
                                       }),
                                   items: chartDropdownItems.map((String title) {
                                     return DropdownMenuItem(
@@ -480,12 +489,12 @@ Widget _buildTile(Widget child, {Function() onTap}) {
       borderRadius: BorderRadius.circular(12.0),
       shadowColor: Color(0x802196F3),
       child: InkWell(
-        // Do onTap() if it isn't null, otherwise do print()
+          // Do onTap() if it isn't null, otherwise do print()
           onTap: onTap != null
               ? () => onTap()
               : () {
-            print('Not set yet');
-          },
+                  print('Not set yet');
+                },
           child: child));
 }
 
@@ -500,7 +509,8 @@ class BNBCustomPainter extends CustomPainter {
     path.moveTo(0, 20); // Start
     path.quadraticBezierTo(size.width * 0.20, 0, size.width * 0.35, 0);
     path.quadraticBezierTo(size.width * 0.40, 0, size.width * 0.40, 20);
-    path.arcToPoint(Offset(size.width * 0.60, 20), radius: Radius.circular(20.0), clockwise: false);
+    path.arcToPoint(Offset(size.width * 0.60, 20),
+        radius: Radius.circular(20.0), clockwise: false);
     path.quadraticBezierTo(size.width * 0.60, 0, size.width * 0.65, 0);
     path.quadraticBezierTo(size.width * 0.80, 0, size.width, 20);
     path.lineTo(size.width, size.height);
