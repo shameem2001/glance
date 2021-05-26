@@ -132,7 +132,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                               ),
-                                              Text('\$123',
+                                              Text('\₹123',
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontWeight: FontWeight.w400,
@@ -160,7 +160,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                               ),
-                                              Text('\$234',
+                                              Text('\₹234',
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontWeight: FontWeight.w400,
@@ -188,7 +188,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                               ),
-                                              Text('\$345',
+                                              Text('\₹345',
                                                   style: TextStyle(
                                                       color: Colors.black,
                                                       fontWeight: FontWeight.w400,
@@ -242,7 +242,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 5.0, horizontal: 12.0),
                                       child: Text(
-                                        'Amount: \$$billAmount',
+                                        'Amount: \₹$billAmount',
                                         style: GoogleFonts.poppins(
                                           color: Colors.white,
                                           fontSize: 20.0,

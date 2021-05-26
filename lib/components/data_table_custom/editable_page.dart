@@ -102,7 +102,7 @@ class _EditablePageState extends State<EditablePage> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     final power = await showTextDialog(
       context,
-      title: 'Change Power Output',
+      title: 'Change Power Rating',
       value: editUser.power,
     );
 
