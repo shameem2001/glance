@@ -222,7 +222,7 @@ class _BillCalculatorScreenState extends State<BillCalculatorScreen> {
                   }
                   consumption = consumption / 1000;
                   print(consumption);
-                  calculatedBill = (consumption * 6.75).toInt() + 600;
+                  calculatedBill = (consumption * 6.75).toInt() + 110;
                   print(calculatedBill);
                   sharedPreferences.setInt(
                       'calculatedBill', calculatedBill);
