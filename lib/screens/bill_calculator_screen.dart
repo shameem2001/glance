@@ -63,6 +63,7 @@ class _BillCalculatorScreenState extends State<BillCalculatorScreen> {
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
+            elevation: 1.5,
             toolbarHeight: 70,
             backgroundColor: Colors.white.withOpacity(0.9),
             centerTitle: true,
@@ -80,11 +81,12 @@ class _BillCalculatorScreenState extends State<BillCalculatorScreen> {
               style: GoogleFonts.montserrat(
                 color: Colors.black,
                 fontWeight: FontWeight.w600,
-                fontSize: 24,
+                fontSize: 22,
               ),
             ),
           ),
           body: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: 20,),
               StaggeredGridView.count(
@@ -94,8 +96,29 @@ class _BillCalculatorScreenState extends State<BillCalculatorScreen> {
                 mainAxisSpacing: 12.0,
                 padding: EdgeInsets.fromLTRB(0.0, 8.0, 20.0, 8.0),
                 children: [
-                  Center(
-                      child: EditablePage()),
+                  Row(
+                    children: [
+                      SizedBox(width: 15,),
+                      Expanded(
+                        child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color(0x802196F3).withOpacity(0.2),
+                                  offset: const Offset(
+                                    5.0,
+                                    5.0,
+                                  ),
+                                  blurRadius: 10.0,
+                                  spreadRadius: 2.0,
+                                ),
+                              ]
+                            ),
+                            child: EditablePage()),
+                      ),
+                    ],
+                  ),
                   // _buildTile(
                   //   Center(
                   //     child: Editable(

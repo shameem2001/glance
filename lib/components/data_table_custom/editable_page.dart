@@ -31,7 +31,7 @@ class _EditablePageState extends State<EditablePage> {
     final columns = ['Appliances', 'Power', 'Count', 'Time'];
 
     return DataTable(
-      columnSpacing: 45,
+      columnSpacing: 37,
       columns: getColumns(columns),
       rows: getRows(users),
     );

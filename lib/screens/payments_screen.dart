@@ -23,8 +23,8 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
     getBillAmount();
+    super.initState();
   }
 
   getBillAmount() async{

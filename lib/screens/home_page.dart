@@ -396,10 +396,11 @@ class _HomePageState extends State<HomePage> {
                           children: <Widget>[
                             Text('Daily Usage',
                                 style: TextStyle(color: Colors.blueAccent, fontSize: 16.0)),
-                            Text('18 units',
+                            SizedBox(height: 5,),
+                            Text(' 18 units',
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontWeight: FontWeight.w700,
+                                    fontWeight: FontWeight.w600,
                                     fontSize: 32.0))
                           ],
                         ),
@@ -435,10 +436,11 @@ class _HomePageState extends State<HomePage> {
                                 children: <Widget>[
                                   Text('Usage Statistics',
                                       style: TextStyle(color: Colors.green, fontSize: 16.0)),
+                                  SizedBox(height: 7,),
                                   Text(' 127 units',
                                       style: TextStyle(
                                           color: Colors.black,
-                                          fontWeight: FontWeight.w700,
+                                          fontWeight: FontWeight.w600,
                                           fontSize: 32.0)),
                                 ],
                               ),
@@ -490,6 +492,7 @@ Widget _buildTile(Widget child, {Function() onTap}) {
       elevation: 14.0,
       borderRadius: BorderRadius.circular(12.0),
       shadowColor: Color(0x802196F3),
+      // shadowColor: Colors.grey[400],
       child: InkWell(
         // Do onTap() if it isn't null, otherwise do print()
           onTap: onTap != null
