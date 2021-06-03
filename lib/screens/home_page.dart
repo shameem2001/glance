@@ -351,7 +351,7 @@ class _HomePageState extends State<HomePage> {
               shrinkWrap: false,
               crossAxisCount: 2,
               crossAxisSpacing: 12.0,
-              mainAxisSpacing: 12.0,
+              mainAxisSpacing: 20.0,
               padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               children: [
                 Column(
@@ -372,7 +372,7 @@ class _HomePageState extends State<HomePage> {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
                           child: Text(
-                            " Daliya",
+                            "\t\tDaliya",
                             style: GoogleFonts.raleway(
                                 fontSize: 32,
                                 color: Colors.black,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:glance/screens/home_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,7 +19,14 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
 
   String uri = "https://wss.kseb.in/selfservices/quickpay";
 
+  bool isEnabled = false;
   int billAmount = 0;
+
+  List date = ['01/01/21', '01/03/21', '01/05/21'];
+  List meterReading = [19275, 19581, 19860];
+  List consumption = [285, 306, 279];
+  List amountPaid = [1930, 2036, 1874];
+  List reciept = [80, 1, 4];
 
   @override
   void initState() {
@@ -54,7 +62,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            toolbarHeight: 70,
+            toolbarHeight: 60,
             backgroundColor: Colors.white,
             centerTitle: true,
             leading: IconButton(
@@ -68,11 +76,11 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
               },
             ),
             title: Text(
-              "Payments",
+              "Bill Payment",
               style: GoogleFonts.montserrat(
                 color: Colors.black,
-                fontWeight: FontWeight.w700,
-                fontSize: 26,
+                fontWeight: FontWeight.w600,
+                fontSize: 22,
               ),
             ),
           ),
@@ -81,122 +89,97 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20.0),
+                    padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
                     child: StaggeredGridView.count(
+                      physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       crossAxisCount: 2,
                       crossAxisSpacing: 12.0,
-                      mainAxisSpacing: 12.0,
+                      mainAxisSpacing: 24.0,
                       padding:
                           EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                       children: [
                         _buildTile(
                           Padding(
-                            padding: const EdgeInsets.all(24.0),
+                            padding: const EdgeInsets.all(0.0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(
-                                  "Payment History",
-                                  style: GoogleFonts.raleway(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 22,
+                                DataTable(
+                                headingTextStyle: TextStyle(
                                     color: Colors.black,
-                                  ),
+                                  fontSize: 14,
                                 ),
-                                GridView.count(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 15.0, horizontal: 15),
-                                  physics: BouncingScrollPhysics(),
-                                  crossAxisCount: 3,
-                                  crossAxisSpacing: 10.0,
-                                  mainAxisSpacing: 10.0,
-                                  shrinkWrap: true,
-                                  children: [
-                                    _buildTile(
-                                      Padding(
-                                        padding: const EdgeInsets.all(12.0),
-                                        child: Center(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: <Widget>[
-                                              Text(
-                                                'Jun',
-                                                style: GoogleFonts.poppins(
-                                                  color: Colors.black,
-                                                  fontSize: 22.0,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                              Text('\₹123',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.w400,
-                                                      fontSize: 18.0))
-                                            ],
-                                          ),
-                                        ),
+                                dataTextStyle: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 13,
+                                ),
+                                  columnSpacing: 14,
+                                  columns: <DataColumn>[
+                                    DataColumn(
+                                      label: Text(
+                                        'Date',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(fontWeight: FontWeight.bold),
                                       ),
                                     ),
-                                    _buildTile(
-                                      Padding(
-                                        padding: const EdgeInsets.all(12.0),
-                                        child: Center(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: <Widget>[
-                                              Text(
-                                                'July',
-                                                style: GoogleFonts.poppins(
-                                                  color: Colors.black,
-                                                  fontSize: 22.0,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                              Text('\₹234',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.w400,
-                                                      fontSize: 18.0))
-                                            ],
-                                          ),
-                                        ),
+                                    DataColumn(
+                                      label: Text(
+                                        'Meter\nReading',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(fontWeight: FontWeight.bold),
                                       ),
                                     ),
-                                    _buildTile(
-                                      Padding(
-                                        padding: const EdgeInsets.all(12.0),
-                                        child: Center(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: <Widget>[
-                                              Text(
-                                                'Aug',
-                                                style: GoogleFonts.poppins(
-                                                  color: Colors.black,
-                                                  fontSize: 22.0,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                              Text('\₹345',
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.w400,
-                                                      fontSize: 18.0))
-                                            ],
-                                          ),
-                                        ),
+                                    DataColumn(
+                                      label: Text(
+                                        'Consumption',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(fontWeight: FontWeight.bold),
                                       ),
+                                    ),
+                                    DataColumn(
+                                      label: Text(
+                                        'Amount\nPaid',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    DataColumn(
+                                      label: Text(
+                                        'Reciept',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ],
+                                  rows: <DataRow>[
+                                    DataRow(
+                                      cells: <DataCell>[
+                                        DataCell(Text(date[0]),),
+                                        DataCell(Text(meterReading[0].toString())),
+                                        DataCell(Text(consumption[0].toString())),
+                                        DataCell(Text(amountPaid[0].toString())),
+                                        DataCell(Icon(Icons.download_rounded, color: Colors.black87,)),
+                                      ],
+                                    ),
+                                    DataRow(
+                                      cells: <DataCell>[
+                                        DataCell(Text(date[1]),),
+                                        DataCell(Text(meterReading[1].toString())),
+                                        DataCell(Text(consumption[1].toString())),
+                                        DataCell(Text(amountPaid[1].toString())),
+                                        DataCell(Icon(Icons.download_rounded, color: Colors.black87,)),
+                                      ],
+                                    ),
+                                    DataRow(
+                                      cells: <DataCell>[
+                                        DataCell(Text(date[2]),),
+                                        DataCell(Text(meterReading[2].toString())),
+                                        DataCell(Text(consumption[2].toString())),
+                                        DataCell(Text(amountPaid[2].toString())),
+                                        DataCell(Icon(Icons.download_rounded, color: Colors.black87,)),
+                                      ],
                                     ),
                                   ],
                                 ),
@@ -205,91 +188,191 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(
-                              top: 20.0, bottom: 10, left: 60, right: 60),
-                          child: _buildTile(
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 22.0, horizontal: 32.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Text(
-                                    'This Month',
-                                    style: GoogleFonts.raleway(
-                                      color: Colors.black,
-                                      fontSize: 22.0,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                  TextButton(
-                                    style: TextButton.styleFrom(
-                                      shadowColor: Color(0x802196F3),
-                                      primary: Colors.white,
-                                      backgroundColor: Colors.black,
-                                      side: BorderSide(
-                                          color: Colors.white, width: 1),
-                                      elevation: 5,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(12),
+                          padding: const EdgeInsets.symmetric(horizontal: 90.0),
+                          child: Material(
+                              elevation: 4.0,
+                              borderRadius: BorderRadius.circular(20.0),
+                              shadowColor: Color(0x802196F3),
+                              borderOnForeground: true,
+                              child: InkWell(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('New reading',
+                                        style: GoogleFonts.montserrat(
+                                          fontSize: 17,
+                                          letterSpacing: 0.5,
+                                          fontWeight: FontWeight.w600,
                                         ),
-                                      ),
-                                    ),
-                                    onPressed: () {},
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 5.0, horizontal: 12.0),
-                                      child: Text(
-                                        'Amount: \₹$billAmount',
-                                        style: GoogleFonts.poppins(
-                                          color: Colors.white,
-                                          fontSize: 20.0,
-                                          fontWeight: FontWeight.w400,
                                         ),
-                                      ),
+                                        Material(
+                                          elevation: 2.0,
+                                          borderRadius: BorderRadius.circular(40.0),
+                                          child: CircleAvatar(
+                                              backgroundColor: Colors.white,
+                                              radius: 18.0,
+                                              child: Icon(Icons.camera_alt, size:22,  color: Colors.black,),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                                  )),),
                         ),
                       ],
                       staggeredTiles: [
-                        StaggeredTile.extent(2, 200),
-                        StaggeredTile.extent(2, 200),
+                        StaggeredTile.extent(2, 230),
+                        StaggeredTile.extent(2, 52),
+                        // StaggeredTile.extent(2, 200),
                       ],
                     ),
                   ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      shadowColor: Color(0x802196F3),
-                      primary: Colors.white,
-                      backgroundColor: Colors.black,
-                      side: BorderSide(
-                          color: Colors.white, width: 1),
-                      elevation: 20,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(12),
+                  Padding(
+                    padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 0.0),
+                    child: new Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Expanded(
+                          child: Container(
+                            height: 50,
+                            child: new TextFormField(
+                              decoration: new InputDecoration(
+                                hintMaxLines: 1,
+                                hintText: "Previous amount: 2134",
+                                hintStyle: TextStyle(
+                                  color: Colors.black,
+                                ),
+                                fillColor: Colors.white,
+                                enabled: false,
+                                disabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(25.0),
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                    width: 2.0,
+                                  ),
+                                ),
+                              ),
+                              validator: (val) {
+                                if(val.length==0) {
+                                  return "Email cannot be empty";
+                                }else{
+                                  return null;
+                                }
+                              },
+                              keyboardType: TextInputType.number,
+                            ),),
+                          flex: 3,
+                        ),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: Container(
+                            height: 50,
+                            child: new TextFormField(
+                              onTap: (){
+                                isEnabled = true;
+                              },
+                              decoration: new InputDecoration(
+                                labelText: isEnabled?'Current amount': null,
+                                alignLabelWithHint: true,
+                                hintText: !isEnabled?"Current amount: 1234":null,
+                                hintStyle: TextStyle(
+                                  color: Colors.black,
+                                ),
+                                labelStyle: TextStyle(
+                                  color: Colors.black,
+                                ),
+                                fillColor: Colors.white,
+                                enabled: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(25.0),
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                    width: 2.0,
+                                  ),
+                                ),
+                              ),
+                              validator: (val) {
+                                if(val.length==0) {
+                                  return "Email cannot be empty";
+                                }else{
+                                  return null;
+                                }
+                              },
+                              keyboardType: TextInputType.number,
+                            ),),
+                          flex: 3,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        shadowColor: Colors.black,
+                        primary: Colors.black,
+                        backgroundColor: Colors.white,
+                        side: BorderSide(
+                            color: Colors.black, width: 2),
+                        elevation: 2,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
+                        ),
+                      ),
+                      onPressed: () async{
+                        //  google pay hyperlink.
+                        await _launchURL();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 5.0, horizontal: 12.0),
+                        child: Text(
+                          'CALCULATE',
+                          style: GoogleFonts.poppins(
+                            color: Colors.black,
+                            fontSize: 16.0,
+                            letterSpacing: 0.5,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
                       ),
                     ),
-                    onPressed: () async{
-                    //  google pay hyperlink.
-                      await _launchURL();
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5.0, horizontal: 12.0),
-                      child: Text(
-                        'Pay Amount',
-                        style: GoogleFonts.poppins(
-                          color: Colors.white,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w400,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40.0, bottom: 40),
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        shadowColor: Color(0x802196F3),
+                        primary: Colors.white,
+                        backgroundColor: Colors.black,
+                        side: BorderSide(
+                            color: Colors.white, width: 1),
+                        elevation: 5,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
+                        ),
+                      ),
+                      onPressed: () async{
+                        //  google pay hyperlink.
+                        await _launchURL();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 12.0),
+                        child: Text(
+                          'Calculated amount:  ₹1243',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                            //letterSpacing: 0.5,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                     ),

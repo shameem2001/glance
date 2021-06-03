@@ -20,13 +20,13 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProviderStateMixin {
-  static const String username = "Daliya Morgan";
-  static const String emailId = "Daliya.morgan@gmail.com";
-  static const String mobileNumber = "+919446422342";
-  static const String subscriptionNumber = "85687495349";
-  static const String address = "Tomkins Square, boulevard street";
-  static const String pin = "670012";
-  static const String state = "Kerala";
+  String username = "Daliya Morgan";
+  String emailId = "Daliya.morgan@gmail.com";
+  String mobileNumber = "+919446422342";
+  String subscriptionNumber = "85687495349";
+  String address = "Tomkins Square, boulevard street";
+  String pin = "670012";
+  String state = "Kerala";
 
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
@@ -209,9 +209,10 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
                                   mainAxisSize: MainAxisSize.max,
                                   children: <Widget>[
                                     new Flexible(
-                                      child: new TextField(
+                                      child: new TextFormField(
+                                        initialValue: username,
                                         decoration: const InputDecoration(
-                                          hintText: username,
+                                          hintText: "Enter name",
                                           hintStyle: khintTextStyle,
                                         ),
                                         enabled: !_status,
@@ -249,9 +250,10 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
                                   mainAxisSize: MainAxisSize.max,
                                   children: <Widget>[
                                     new Flexible(
-                                      child: new TextField(
+                                      child: new TextFormField(
+                                        initialValue: emailId,
                                         decoration: const InputDecoration(
-                                            hintText: emailId,
+                                          hintText: "Enter email id",
                                           hintStyle: khintTextStyle,
                                         ),
                                         enabled: !_status,
@@ -287,9 +289,10 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
                                   mainAxisSize: MainAxisSize.max,
                                   children: <Widget>[
                                     new Flexible(
-                                      child: new TextField(
+                                      child: new TextFormField(
+                                        initialValue: mobileNumber,
                                         decoration: const InputDecoration(
-                                            hintText: mobileNumber,
+                                          hintText: "Enter mobile number",
                                           hintStyle: khintTextStyle,
                                         ),
                                         enabled: !_status,
@@ -325,9 +328,10 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
                                   mainAxisSize: MainAxisSize.max,
                                   children: <Widget>[
                                     new Flexible(
-                                      child: new TextField(
+                                      child: new TextFormField(
+                                        initialValue: subscriptionNumber,
                                         decoration: const InputDecoration(
-                                          hintText: subscriptionNumber,
+                                          hintText: "Enter mobile number",
                                           hintStyle: khintTextStyle,
                                         ),
                                         enabled: !_status,
@@ -363,9 +367,10 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
                                   mainAxisSize: MainAxisSize.max,
                                   children: <Widget>[
                                     new Flexible(
-                                      child: new TextField(
+                                      child: new TextFormField(
+                                        initialValue: address,
                                         decoration: const InputDecoration(
-                                          hintText: address,
+                                          hintText: "Enter subscription number",
                                           hintStyle: khintTextStyle,
                                         ),
                                         enabled: !_status,
@@ -416,9 +421,10 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
                                     Flexible(
                                       child: Padding(
                                         padding: EdgeInsets.only(right: 10.0),
-                                        child: new TextField(
+                                        child: new TextFormField(
+                                          initialValue: pin,
                                           decoration: const InputDecoration(
-                                              hintText: pin,
+                                            hintText: "Enter pin",
                                             hintStyle: khintTextStyle,
                                           ),
                                           enabled: !_status,
@@ -427,9 +433,10 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
                                       flex: 2,
                                     ),
                                     Flexible(
-                                      child: new TextField(
+                                      child: new TextFormField(
+                                        initialValue: state,
                                         decoration: const InputDecoration(
-                                            hintText: state,
+                                          hintText: "Enter State",
                                           hintStyle: khintTextStyle,
                                         ),
                                         enabled: !_status,
