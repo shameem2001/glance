@@ -1,6 +1,7 @@
 import 'package:double_back_to_close/double_back_to_close.dart';
 import 'package:flutter/material.dart';
-import 'package:glance/screens/bill_calculator_screen.dart';
+import 'package:glance/screens/bill_history_screen.dart';
+import 'package:glance/screens/bill_payment_second_screen.dart';
 import 'package:glance/screens/enter_details_screen.dart';
 import 'package:glance/screens/home_page.dart';
 import 'package:glance/screens/login_screen.dart';
@@ -40,7 +41,8 @@ class Glance extends StatelessWidget {
             child: HomePage(),),
         ProfileScreen.id: (context) => ProfileScreen(),
         PaymentsScreen.id: (context) => PaymentsScreen(),
-        BillCalculatorScreen.id: (context) => BillCalculatorScreen(),
+        BillPaymentSecondScreen.id: (context) => BillPaymentSecondScreen(),
+        BillHistoryScreen.id: (context) => BillHistoryScreen(),
         NotificationScreen.id: (context) => NotificationScreen(),
       },
     );

@@ -217,7 +217,9 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
                                         ),
                                         enabled: !_status,
                                         autofocus: !_status,
-
+                                        onFieldSubmitted: (value){
+                                          username = value;
+                                        },
                                       ),
                                     ),
                                   ],
@@ -257,6 +259,9 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
                                           hintStyle: khintTextStyle,
                                         ),
                                         enabled: !_status,
+                                        onFieldSubmitted: (value){
+                                          emailId = value;
+                                        },
                                       ),
                                     ),
                                   ],
@@ -296,6 +301,9 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
                                           hintStyle: khintTextStyle,
                                         ),
                                         enabled: !_status,
+                                        onFieldSubmitted: (value){
+                                          mobileNumber = value;
+                                        },
                                       ),
                                     ),
                                   ],
@@ -335,6 +343,9 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
                                           hintStyle: khintTextStyle,
                                         ),
                                         enabled: !_status,
+                                        onFieldSubmitted: (value){
+                                          subscriptionNumber = value;
+                                        },
                                       ),
                                     ),
                                   ],
@@ -374,6 +385,9 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
                                           hintStyle: khintTextStyle,
                                         ),
                                         enabled: !_status,
+                                        onFieldSubmitted: (value){
+                                          address = value;
+                                        },
                                       ),
                                     ),
                                   ],
@@ -428,6 +442,9 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
                                             hintStyle: khintTextStyle,
                                           ),
                                           enabled: !_status,
+                                          onFieldSubmitted: (value){
+                                            pin = value;
+                                          },
                                         ),
                                       ),
                                       flex: 2,
@@ -440,6 +457,9 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
                                           hintStyle: khintTextStyle,
                                         ),
                                         enabled: !_status,
+                                        onFieldSubmitted: (value){
+                                          state = value;
+                                        },
                                       ),
                                       flex: 2,
                                     ),

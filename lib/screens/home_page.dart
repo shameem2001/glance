@@ -6,7 +6,7 @@ import 'package:glance/screens/notification_screen.dart';
 import 'package:glance/screens/payments_screen.dart';
 import 'package:glance/screens/profile_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'bill_calculator_screen.dart';
+import 'bill_history_screen.dart';
 import 'package:flutter_sparkline/flutter_sparkline.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -251,7 +251,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       currentIndex = index;
       if(currentIndex == 0)
-        Navigator.pushReplacementNamed(context, BillCalculatorScreen.id);
+        Navigator.pushReplacementNamed(context, BillHistoryScreen.id);
       else if(currentIndex == 1)
         Navigator.pushReplacementNamed(context, PaymentsScreen.id);
       else if(currentIndex == 2)

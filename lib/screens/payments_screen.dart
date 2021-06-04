@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:glance/components/uploadIcon.dart';
+import 'package:glance/screens/bill_payment_second_screen.dart';
 import 'package:glance/screens/home_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'dart:io';
 
 class PaymentsScreen extends StatefulWidget {
   static const String id = "payments_screen";
@@ -16,9 +19,6 @@ class PaymentsScreen extends StatefulWidget {
 }
 
 class _PaymentsScreenState extends State<PaymentsScreen> {
-
-  String uri = "https://wss.kseb.in/selfservices/quickpay";
-
   bool isEnabled = false;
   int billAmount = 0;
 
@@ -35,26 +35,37 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
     super.initState();
   }
 
-  getBillAmount() async{
+  getBillAmount() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     billAmount = sharedPreferences.getInt('calculatedBill');
     print(billAmount);
-    setState(() {
-    });
+    setState(() {});
   }
 
-  void _launchURL() async =>
-      await canLaunch(uri) ? await launch(uri) : throw 'Could not launch $uri';
+  double newMeterReading;
+
+  File _image;
+  final picker= ImagePicker();
+  Future pickImage(bool isCamera) async{
+    File image;
+    // if(isCamera){
+    //   image=await picker.pickImage(source: ImageSource.camera);
+    // }else{
+    //   image=await picker.pickImage(source: ImageSource.gallery);
+    // }
+    setState(() {
+      _image=image;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        if(Navigator.canPop(context)){
+        if (Navigator.canPop(context)) {
           Navigator.pop(context);
           return true;
-        }
-        else{
+        } else {
           Navigator.popAndPushNamed(context, HomePage.id);
           return false;
         }
@@ -97,7 +108,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                       crossAxisSpacing: 12.0,
                       mainAxisSpacing: 24.0,
                       padding:
-                          EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                          EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
                       children: [
                         _buildTile(
                           Padding(
@@ -107,78 +118,104 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 DataTable(
-                                headingTextStyle: TextStyle(
+                                  headingTextStyle: TextStyle(
                                     color: Colors.black,
-                                  fontSize: 14,
-                                ),
-                                dataTextStyle: TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                  dataTextStyle: TextStyle(
                                     color: Colors.black,
                                     fontSize: 13,
-                                ),
+                                  ),
                                   columnSpacing: 14,
                                   columns: <DataColumn>[
                                     DataColumn(
                                       label: Text(
                                         'Date',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(fontWeight: FontWeight.bold),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                     DataColumn(
                                       label: Text(
                                         'Meter\nReading',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(fontWeight: FontWeight.bold),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                     DataColumn(
                                       label: Text(
                                         'Consumption',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(fontWeight: FontWeight.bold),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                     DataColumn(
                                       label: Text(
                                         'Amount\nPaid',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(fontWeight: FontWeight.bold),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                     DataColumn(
                                       label: Text(
                                         'Reciept',
                                         textAlign: TextAlign.center,
-                                        style: TextStyle(fontWeight: FontWeight.bold),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                   ],
                                   rows: <DataRow>[
                                     DataRow(
                                       cells: <DataCell>[
-                                        DataCell(Text(date[0]),),
-                                        DataCell(Text(meterReading[0].toString())),
-                                        DataCell(Text(consumption[0].toString())),
-                                        DataCell(Text(amountPaid[0].toString())),
-                                        DataCell(Icon(Icons.download_rounded, color: Colors.black87,)),
+                                        DataCell(
+                                          Text(date[0]),
+                                        ),
+                                        DataCell(
+                                            Text(meterReading[0].toString())),
+                                        DataCell(
+                                            Text(consumption[0].toString())),
+                                        DataCell(
+                                            Text(amountPaid[0].toString())),
+                                        DataCell(
+                                          UploadIcon(),
+                                        ),
                                       ],
                                     ),
                                     DataRow(
                                       cells: <DataCell>[
-                                        DataCell(Text(date[1]),),
-                                        DataCell(Text(meterReading[1].toString())),
-                                        DataCell(Text(consumption[1].toString())),
-                                        DataCell(Text(amountPaid[1].toString())),
-                                        DataCell(Icon(Icons.download_rounded, color: Colors.black87,)),
+                                        DataCell(
+                                          Text(date[1]),
+                                        ),
+                                        DataCell(
+                                            Text(meterReading[1].toString())),
+                                        DataCell(
+                                            Text(consumption[1].toString())),
+                                        DataCell(
+                                            Text(amountPaid[1].toString())),
+                                        DataCell(
+                                          UploadIcon(),
+                                        ),
                                       ],
                                     ),
                                     DataRow(
                                       cells: <DataCell>[
-                                        DataCell(Text(date[2]),),
-                                        DataCell(Text(meterReading[2].toString())),
-                                        DataCell(Text(consumption[2].toString())),
-                                        DataCell(Text(amountPaid[2].toString())),
-                                        DataCell(Icon(Icons.download_rounded, color: Colors.black87,)),
+                                        DataCell(
+                                          Text(date[2]),
+                                        ),
+                                        DataCell(
+                                            Text(meterReading[2].toString())),
+                                        DataCell(
+                                            Text(consumption[2].toString())),
+                                        DataCell(
+                                            Text(amountPaid[2].toString())),
+                                        DataCell(
+                                          UploadIcon(),
+                                        ),
                                       ],
                                     ),
                                   ],
@@ -188,37 +225,141 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 90.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 80.0),
                           child: Material(
-                              elevation: 4.0,
-                              borderRadius: BorderRadius.circular(20.0),
-                              shadowColor: Color(0x802196F3),
-                              borderOnForeground: true,
-                              child: InkWell(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text('New reading',
+                            elevation: 4.0,
+                            borderRadius: BorderRadius.circular(20.0),
+                            shadowColor: Color(0x802196F3),
+                            borderOnForeground: true,
+                            child: InkWell(
+                                onTap: () {
+                                  showModalBottomSheet(
+                                    backgroundColor: Colors.transparent,
+                                    elevation: 1,
+                                    context: context,
+                                    builder: (context) => Container(
+                                      margin: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey[300],
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      height: 100,
+                                      width: double.infinity,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: <Widget>[
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              IconButton(
+                                                onPressed: () {
+                                                  pickImage(false);
+                                                },
+                                                icon: Icon(
+                                                  Icons.insert_drive_file,
+                                                  color: Colors.black87,
+                                                  size: 26,
+                                                ),
+                                              ),
+                                              Text(
+                                                'Documents',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontFamily: 'Raleway',
+                                                  fontSize: 15,
+                                                  color: Colors.black54,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              IconButton(
+                                                  onPressed: () {
+                                                    pickImage(true);
+                                                  },
+                                                  icon: Icon(
+                                                    Icons.camera_alt,
+                                                    color: Colors.black87,
+                                                    size: 26,
+                                                  )),
+                                              Text(
+                                                'Camera',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontFamily: 'Raleway',
+                                                  fontSize: 15,
+                                                  color: Colors.black54,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              IconButton(
+                                                  onPressed: () {
+                                                    pickImage(false);
+                                                  },
+                                                  icon: Icon(
+                                                    Icons.image,
+                                                    color: Colors.black87,
+                                                    size: 26,
+                                                  )),
+                                              Text(
+                                                'Gallery',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontFamily: 'Raleway',
+                                                  fontSize: 15,
+                                                  color: Colors.black54,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'New reading',
                                         style: GoogleFonts.montserrat(
                                           fontSize: 17,
-                                          letterSpacing: 0.5,
+                                          letterSpacing: 0.75,
                                           fontWeight: FontWeight.w600,
                                         ),
-                                        ),
-                                        Material(
-                                          elevation: 2.0,
-                                          borderRadius: BorderRadius.circular(40.0),
-                                          child: CircleAvatar(
-                                              backgroundColor: Colors.white,
-                                              radius: 18.0,
-                                              child: Icon(Icons.camera_alt, size:22,  color: Colors.black,),
+                                      ),
+                                      Material(
+                                        elevation: 2.0,
+                                        borderRadius:
+                                            BorderRadius.circular(40.0),
+                                        child: CircleAvatar(
+                                          backgroundColor: Colors.white,
+                                          radius: 18.0,
+                                          child: Icon(
+                                            Icons.camera_alt,
+                                            size: 22,
+                                            color: Colors.black,
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                  )),),
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                          ),
                         ),
                       ],
                       staggeredTiles: [
@@ -229,82 +370,39 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 0.0),
-                    child: new Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Expanded(
-                          child: Container(
-                            height: 50,
-                            child: new TextFormField(
-                              decoration: new InputDecoration(
-                                hintMaxLines: 1,
-                                hintText: "Previous amount: 2134",
-                                hintStyle: TextStyle(
-                                  color: Colors.black,
-                                ),
-                                fillColor: Colors.white,
-                                enabled: false,
-                                disabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(25.0),
-                                  borderSide: BorderSide(
-                                    color: Colors.black,
-                                    width: 2.0,
-                                  ),
-                                ),
-                              ),
-                              validator: (val) {
-                                if(val.length==0) {
-                                  return "Email cannot be empty";
-                                }else{
-                                  return null;
-                                }
-                              },
-                              keyboardType: TextInputType.number,
-                            ),),
-                          flex: 3,
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Container(
+                      width: 250,
+                      height: 50,
+                      child: new TextFormField(
+                        onTap: () {
+                          isEnabled = true;
+                        },
+                        decoration: new InputDecoration(
+                          hintText:
+                              !isEnabled ? "Enter new meter reading" : null,
+                          hintStyle: TextStyle(
+                            color: Colors.black54,
+                            height: 2.5,
+                          ),
+                          fillColor: Colors.white,
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                            borderSide: BorderSide(
+                              color: Colors.black,
+                              width: 1.0,
+                            ),
+                          ),
                         ),
-                        SizedBox(width: 10),
-                        Expanded(
-                          child: Container(
-                            height: 50,
-                            child: new TextFormField(
-                              onTap: (){
-                                isEnabled = true;
-                              },
-                              decoration: new InputDecoration(
-                                labelText: isEnabled?'Current amount': null,
-                                alignLabelWithHint: true,
-                                hintText: !isEnabled?"Current amount: 1234":null,
-                                hintStyle: TextStyle(
-                                  color: Colors.black,
-                                ),
-                                labelStyle: TextStyle(
-                                  color: Colors.black,
-                                ),
-                                fillColor: Colors.white,
-                                enabled: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(25.0),
-                                  borderSide: BorderSide(
-                                    color: Colors.black,
-                                    width: 2.0,
-                                  ),
-                                ),
-                              ),
-                              validator: (val) {
-                                if(val.length==0) {
-                                  return "Email cannot be empty";
-                                }else{
-                                  return null;
-                                }
-                              },
-                              keyboardType: TextInputType.number,
-                            ),),
-                          flex: 3,
-                        ),
-                      ],
+                        validator: (val) {
+                          if (val.length == 0) {
+                            return "Email cannot be empty";
+                          } else {
+                            return null;
+                          }
+                        },
+                        keyboardType: TextInputType.number,
+                      ),
                     ),
                   ),
                   Padding(
@@ -314,8 +412,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                         shadowColor: Colors.black,
                         primary: Colors.black,
                         backgroundColor: Colors.white,
-                        side: BorderSide(
-                            color: Colors.black, width: 2),
+                        side: BorderSide(color: Colors.black, width: 2),
                         elevation: 2,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(
@@ -323,10 +420,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                           ),
                         ),
                       ),
-                      onPressed: () async{
-                        //  google pay hyperlink.
-                        await _launchURL();
-                      },
+                      onPressed: () async {},
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 5.0, horizontal: 12.0),
@@ -343,39 +437,8 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 40.0, bottom: 40),
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        shadowColor: Color(0x802196F3),
-                        primary: Colors.white,
-                        backgroundColor: Colors.black,
-                        side: BorderSide(
-                            color: Colors.white, width: 1),
-                        elevation: 5,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(20),
-                          ),
-                        ),
-                      ),
-                      onPressed: () async{
-                        //  google pay hyperlink.
-                        await _launchURL();
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 12.0),
-                        child: Text(
-                          'Calculated amount:  ₹1243',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20.0,
-                            //letterSpacing: 0.5,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: _buildRegisterBtn(context),
                   ),
                 ],
               ),
@@ -400,4 +463,48 @@ Widget _buildTile(Widget child, {Function() onTap}) {
                   print('Not set yet');
                 },
           child: child));
+}
+
+Widget _buildRegisterBtn(BuildContext context) {
+  return Padding(
+    padding: const EdgeInsets.all(12.0),
+    child: Container(
+      padding: EdgeInsets.symmetric(vertical: 25.0, horizontal: 80),
+      width: double.infinity,
+      // ignore: deprecated_member_use
+      child: RaisedButton(
+        elevation: 5.0,
+        onPressed: () =>
+            Navigator.pushReplacementNamed(context, BillPaymentSecondScreen.id),
+        padding: EdgeInsets.all(15.0),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        color: Colors.black,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'CONTINUE',
+              style: TextStyle(
+                color: Colors.white,
+                letterSpacing: 1.5,
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'OpenSans',
+              ),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.white,
+              size: 20,
+            )
+          ],
+        ),
+      ),
+    ),
+  );
 }
