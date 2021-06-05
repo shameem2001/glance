@@ -94,7 +94,8 @@ class Authentication {
       }
       await FirebaseAuth.instance.signOut();
       sharedPreferences.setBool('isSignedIn', false);
-      Navigator.popAndPushNamed(context, WelcomeScreen.id);
+      Navigator.pushNamedAndRemoveUntil(context, WelcomeScreen.id, (route) => false);
+      // Navigator.popAndPushNamed(context, WelcomeScreen.id);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         Authentication.customSnackBar(
