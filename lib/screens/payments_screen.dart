@@ -204,7 +204,10 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                                         DataCell(
                                             Text(meterReading[0].toString())),
                                         DataCell(
-                                            Text(consumption[0].toString())),
+                                            Text(
+                                                consumption[0].toString(),
+                                                textAlign: TextAlign.center,
+                                            ),),
                                         DataCell(
                                             Text(amountPaid[0].toString())),
                                         DataCell(
@@ -220,7 +223,9 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                                         DataCell(
                                             Text(meterReading[1].toString())),
                                         DataCell(
-                                            Text(consumption[1].toString())),
+                                            Text(consumption[1].toString(),
+                                              textAlign: TextAlign.center,
+                                            )),
                                         DataCell(
                                             Text(amountPaid[1].toString())),
                                         DataCell(
@@ -236,7 +241,9 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                                         DataCell(
                                             Text(meterReading[2].toString())),
                                         DataCell(
-                                            Text(consumption[2].toString())),
+                                            Text(consumption[2].toString(),
+                                              textAlign: TextAlign.center,
+                                            ),),
                                         DataCell(
                                             Text(amountPaid[2].toString())),
                                         DataCell(
