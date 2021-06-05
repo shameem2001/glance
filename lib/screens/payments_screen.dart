@@ -23,7 +23,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
   int billAmount = 0;
   int consumptionFromMeter = 0;
 
-  List date = ['24/01/21', '20/03/21', '22/05/21'];
+  List date = ['24/01/21', '22/03/21', '20/05/21'];
   List meterReading = [19275, 19581, 19860];
   List<int> consumption = [285, 306, 279];
   List amountPaid = [1227, 1530, 1189];
