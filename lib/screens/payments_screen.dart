@@ -437,7 +437,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
+                    padding: const EdgeInsets.only(top: 10.0),
                     child: _buildRegisterBtn(context),
                   ),
                 ],

@@ -26,15 +26,14 @@ class _BillHistoryScreenState extends State<BillHistoryScreen> {
   double consumption = 0;
 
   List rows = [
-    {"Date": '20/12/20', "Meter\nreading": "23432", "Consumption": '25644', "Amount\npaid": '₹2324',},
-    {"Date": '20/12/20', "Meter\nreading": "23432", "Consumption": '25644', "Amount\npaid": '₹2324',},
-    {"Date": '20/12/20', "Meter\nreading": "23432", "Consumption": '25644', "Amount\npaid": '₹2324',},
-    {"Date": '20/12/20', "Meter\nreading": "23432", "Consumption": '25644', "Amount\npaid": '₹2324',},
-    {"Date": '20/12/20', "Meter\nreading": "23432", "Consumption": '25644', "Amount\npaid": '₹2324',},
-    {"Date": '20/12/20', "Meter\nreading": "23432", "Consumption": '25644', "Amount\npaid": '₹2324',},
-    {"Date": '20/12/20', "Meter\nreading": "23432", "Consumption": '25644', "Amount\npaid": '₹2324',},
-    {"Date": '20/12/20', "Meter\nreading": "23432", "Consumption": '25644', "Amount\npaid": '₹2324',},
-    {"Date": '20/12/20', "Meter\nreading": "23432", "Consumption": '25644', "Amount\npaid": '₹2324',},
+    {"Date": '01/04/20', "Meter\nreading": "23432", "Consumption": '250', "Amount\npaid": '₹3324',},
+    {"Date": '01/06/20', "Meter\nreading": "20432", "Consumption": '246', "Amount\npaid": '₹2424',},
+    {"Date": '01/08/20', "Meter\nreading": "19432", "Consumption": '196', "Amount\npaid": '₹2324',},
+    {"Date": '01/10/20', "Meter\nreading": "22432", "Consumption": '206', "Amount\npaid": '₹4324',},
+    {"Date": '01/12/20', "Meter\nreading": "21432", "Consumption": '216', "Amount\npaid": '₹2454',},
+    {"Date": '01/01/21', "Meter\nreading": "19275", "Consumption": '285', "Amount\npaid": '₹1930',},
+    {"Date": '01/03/21', "Meter\nreading": "19581", "Consumption": '306', "Amount\npaid": '₹2036',},
+    {"Date": '01/05/21', "Meter\nreading": "19860", "Consumption": '278', "Amount\npaid": '₹1874',},
   ];
 
 //Headers or Columns
@@ -48,12 +47,13 @@ class _BillHistoryScreenState extends State<BillHistoryScreen> {
 
   List<Appliances> applianceObject;
 
-  int rowCount=9;
+  int rowCount;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    rowCount = rows.length;
     setDatas();
   }
 
@@ -105,13 +105,13 @@ class _BillHistoryScreenState extends State<BillHistoryScreen> {
                     height: 20,
                   ),
                   Container(
-                    height: 50 * rowCount.toDouble(),
+                    height: 55 * rowCount.toDouble(),
                     width: MediaQuery.of(context).size.width,
                     child: Center(
                       child: Editable(
                         rowCount: rowCount,
                         columnCount: 4,
-                        columnRatio: 0.23,
+                        columnRatio: 0.22,
                         zebraStripe: true,
                         stripeColor1: Colors.white,
                         stripeColor2: Colors.grey[500],
@@ -127,90 +127,93 @@ class _BillHistoryScreenState extends State<BillHistoryScreen> {
                         },
                         thAlignment: TextAlign.center,
                         thStyle: GoogleFonts.poppins(
-                          fontSize: 11,
+                          fontSize: 10,
                           fontWeight: FontWeight.bold,
                         ),
+                        saveIconColor: Colors.black54,
                         columns: columns,
                         rows: rows,
                         showCreateButton: false,
                         tdStyle: TextStyle(fontSize: 12),
                         tdAlignment: TextAlign.center,
-                        showSaveIcon: false,
+                        showSaveIcon: true,
                         borderColor: Colors.black,
                         borderWidth: 0.5,
                         thVertAlignment: CrossAxisAlignment.center,
                       ),
                     ),
                   ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      primary: Colors.black,
-                      backgroundColor: Colors.white,
-                      side: BorderSide(color: Colors.black, width: 2),
-                      elevation: 10,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(20),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12.0),
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        primary: Colors.black,
+                        backgroundColor: Colors.white,
+                        side: BorderSide(color: Colors.black, width: 2),
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
                         ),
                       ),
-                    ),
-                    onPressed: () async {
-                      // SharedPreferences sharedPreferences =
-                      //     await SharedPreferences.getInstance();
-                      // List _power = [
-                      //   double.parse(sharedPreferences.getString('power1')),
-                      //   double.parse(sharedPreferences.getString('power2')),
-                      //   double.parse(sharedPreferences.getString('power3'))
-                      // ];
-                      // List _count = [
-                      //   double.parse(sharedPreferences.getString('count1')),
-                      //   double.parse(sharedPreferences.getString('count2')),
-                      //   double.parse(sharedPreferences.getString('count3'))
-                      // ];
-                      // List _time = [
-                      //   double.parse(sharedPreferences.getString('time1')),
-                      //   double.parse(sharedPreferences.getString('time2')),
-                      //   double.parse(sharedPreferences.getString('time3'))
-                      // ];
-                      //
-                      // for (int index = 0; index < 3; index++) {
-                      //   double power = _power[index];
-                      //   double count = _count[index];
-                      //   double time = _time[index];
-                      //   print(power);
-                      //   print(count);
-                      //   print(time);
-                      //   print(power * count * time * 6);
-                      //   consumption += (power * count * time * 6);
-                      // }
-                      // consumption = consumption / 1000;
-                      // print(consumption);
-                      // calculatedBill = (consumption * 6.75).toInt() + 110;
-                      // print(calculatedBill);
-                      // sharedPreferences.setInt('calculatedBill', calculatedBill);
-                      rows = addOneRow(columns, rows);
-                      rowCount++;
-                      setState(() {});
-                      setState(() {});
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5.0, horizontal: 12.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'ADD ITEM',
-                            style: GoogleFonts.poppins(
-                              color: Colors.black,
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.w400,
-                              letterSpacing: 1,
+                      onPressed: () async {
+                        // SharedPreferences sharedPreferences =
+                        //     await SharedPreferences.getInstance();
+                        // List _power = [
+                        //   double.parse(sharedPreferences.getString('power1')),
+                        //   double.parse(sharedPreferences.getString('power2')),
+                        //   double.parse(sharedPreferences.getString('power3'))
+                        // ];
+                        // List _count = [
+                        //   double.parse(sharedPreferences.getString('count1')),
+                        //   double.parse(sharedPreferences.getString('count2')),
+                        //   double.parse(sharedPreferences.getString('count3'))
+                        // ];
+                        // List _time = [
+                        //   double.parse(sharedPreferences.getString('time1')),
+                        //   double.parse(sharedPreferences.getString('time2')),
+                        //   double.parse(sharedPreferences.getString('time3'))
+                        // ];
+                        //
+                        // for (int index = 0; index < 3; index++) {
+                        //   double power = _power[index];
+                        //   double count = _count[index];
+                        //   double time = _time[index];
+                        //   print(power);
+                        //   print(count);
+                        //   print(time);
+                        //   print(power * count * time * 6);
+                        //   consumption += (power * count * time * 6);
+                        // }
+                        // consumption = consumption / 1000;
+                        // print(consumption);
+                        // calculatedBill = (consumption * 6.75).toInt() + 110;
+                        // print(calculatedBill);
+                        // sharedPreferences.setInt('calculatedBill', calculatedBill);
+                        rows = addOneRow(columns, rows);
+                        rowCount++;
+                        setState(() {});
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 5.0, horizontal: 12.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'ADD ITEM',
+                              style: GoogleFonts.poppins(
+                                color: Colors.black,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.w400,
+                                letterSpacing: 1,
+                              ),
                             ),
-                          ),
-                          SizedBox(width: 5,),
-                          Icon(Icons.add, size: 26,),
-                        ],
+                            SizedBox(width: 5,),
+                            Icon(Icons.add, size: 26,),
+                          ],
+                        ),
                       ),
                     ),
                   ),
