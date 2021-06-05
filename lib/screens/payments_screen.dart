@@ -66,11 +66,11 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
     if(40 < consumptionFromMeter && consumptionFromMeter <= 80)
       energyCharge = consumptionFromMeter * 2.2;
     if(80 < consumptionFromMeter && consumptionFromMeter <= 120)
-      energyCharge = 675 + ((consumptionFromMeter - 80) * 3.0);
+      energyCharge = 176 + ((consumptionFromMeter - 80) * 3.0);
     if(120 < consumptionFromMeter && consumptionFromMeter <= 150)
-      energyCharge = 675 + ((consumptionFromMeter - 120) * 3.8);
+      energyCharge = 296 + ((consumptionFromMeter - 120) * 3.8);
     if(150 < consumptionFromMeter && consumptionFromMeter <= 200)
-      energyCharge = 675 + ((consumptionFromMeter - 150) * 5.3);
+      energyCharge = 410 + ((consumptionFromMeter - 150) * 5.3);
     if(200 < consumptionFromMeter && consumptionFromMeter <= 300)
       energyCharge = 675 + ((consumptionFromMeter - 200) * 6.5);
     if(300 < consumptionFromMeter && consumptionFromMeter <= 350)
@@ -474,7 +474,7 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                         padding: const EdgeInsets.symmetric(
                             vertical: 5.0, horizontal: 12.0),
                         child: Text(
-                          'CALCULATE',
+                          'SAVE',
                           style: GoogleFonts.poppins(
                             color: Colors.black,
                             fontSize: 16.0,

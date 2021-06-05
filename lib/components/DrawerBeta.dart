@@ -27,7 +27,7 @@ class DrawerBetaState extends State<DrawerBeta> {
             children: [
               UserAccountsDrawerHeader(
                 accountName: Text(
-                  'John Doe',
+                  'Daliya Joseph',
                   style: TextStyle(
                     color: Colors.black54,
                     fontSize: 16,
@@ -35,7 +35,7 @@ class DrawerBetaState extends State<DrawerBeta> {
                   ),
                 ),
                 accountEmail: Text(
-                  'johndoe@gmail.com',
+                  'daliya.joseph@gmail.com',
                   style: TextStyle(
                     color: Colors.black54,
                     fontSize: 14,
