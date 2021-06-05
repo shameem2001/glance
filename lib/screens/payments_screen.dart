@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:glance/components/uploadIcon.dart';
 import 'package:glance/screens/bill_payment_second_screen.dart';
 import 'package:glance/screens/home_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:io';
 
 class PaymentsScreen extends StatefulWidget {
   static const String id = "payments_screen";
