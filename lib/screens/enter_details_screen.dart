@@ -187,14 +187,14 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
       // ignore: deprecated_member_use
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: () async{
+        onPressed: () {
           // if(address != ""){
-            SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-            sharedPreferences.setString("name", name);
-            sharedPreferences.setString("phone", phone);
-            sharedPreferences.setString("subscriptionNumber", subscriptionNumber);
-            sharedPreferences.setString("address", address);
-            await Navigator.pushReplacementNamed(context, RegisterScreen.id);
+          //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+          //   sharedPreferences.setString("name", name);
+          //   sharedPreferences.setString("phone", phone);
+          //   sharedPreferences.setString("subscriptionNumber", subscriptionNumber);
+          //   sharedPreferences.setString("address", address);
+          Navigator.pushReplacementNamed(context, RegisterScreen.id);
           // }
         },
         padding: EdgeInsets.all(15.0),
