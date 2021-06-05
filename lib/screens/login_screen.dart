@@ -26,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _auth = FirebaseAuth.instance;
 
   bool _rememberMe = false;
-  String username;
+  String email;
   String password;
 
   Widget _buildPhoto() {
@@ -51,7 +51,8 @@ class _LoginScreenState extends State<LoginScreen> {
           height: 60.0,
           child: TextField(
             onSubmitted: (value) {
-              username = value;
+              email = value;
+              print(email);
             },
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
@@ -90,6 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: TextField(
             onSubmitted: (value) {
               password = value;
+              print(password);
             },
             obscureText: true,
             style: TextStyle(
@@ -166,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
           });
           try {
             final user = await _auth.signInWithEmailAndPassword(
-                email: username, password: password);
+                email: email, password: password);
             if (user != null) {
               sharedPreferences.setBool('isSignedIn', true);
               Navigator.pushReplacementNamed(context, HomePage.id);

@@ -38,6 +38,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
           child: TextField(
             onSubmitted: (value){
               name = value;
+              print(name);
             },
             keyboardType: TextInputType.name,
             style: TextStyle(
@@ -76,6 +77,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
           child: TextField(
             onSubmitted: (value){
               phone = value;
+              print(phone);
             },
             keyboardType: TextInputType.phone,
             style: TextStyle(
@@ -114,6 +116,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
           child: TextField(
             onSubmitted: (value){
               subscriptionNumber = value;
+              print(subscriptionNumber);
             },
             keyboardType: TextInputType.number,
             style: TextStyle(
@@ -153,6 +156,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
           child: TextField(
             onSubmitted: (value){
               address = value;
+              print(address);
             },
             keyboardType: TextInputType.streetAddress,
             style: TextStyle(
@@ -187,7 +191,6 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
           // if(address != ""){
             SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
             sharedPreferences.setString("name", name);
-            sharedPreferences.setString("phone", phone);
             sharedPreferences.setString("phone", phone);
             sharedPreferences.setString("subscriptionNumber", subscriptionNumber);
             sharedPreferences.setString("address", address);

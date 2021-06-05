@@ -81,6 +81,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: TextField(
             onSubmitted: (value){
               password = value;
+              print(password);
             },
             obscureText: true,
             style: TextStyle(
@@ -119,6 +120,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: TextField(
             onSubmitted: (value){
               password2 = value;
+              print(password2);
             },
             obscureText: true,
             style: TextStyle(
