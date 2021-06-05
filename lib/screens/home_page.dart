@@ -401,7 +401,7 @@ class _HomePageState extends State<HomePage> {
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w600,
-                                    fontSize: 32.0))
+                                    fontSize: 30.0))
                           ],
                         ),
                         Material(
@@ -441,7 +441,7 @@ class _HomePageState extends State<HomePage> {
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.w600,
-                                          fontSize: 32.0)),
+                                          fontSize: 30.0)),
                                 ],
                               ),
                               DropdownButton(
@@ -476,8 +476,8 @@ class _HomePageState extends State<HomePage> {
               ],
               staggeredTiles: [
                 StaggeredTile.extent(2, 100.0),
-                StaggeredTile.extent(2, 115.0),
-                StaggeredTile.extent(2, 225.0),
+                StaggeredTile.extent(2, 110.0),
+                StaggeredTile.extent(2, 220.0),
               ],
             ),
           ],
