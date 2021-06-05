@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:glance/screens/register_screen.dart';
 import 'package:glance/screens/welcome_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'login_screen.dart';
 
 class EnterDetailsScreen extends StatefulWidget {
@@ -182,7 +183,15 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
       // ignore: deprecated_member_use
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: () => Navigator.pushReplacementNamed(context, RegisterScreen.id),
+        onPressed: () async{
+          SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+          sharedPreferences.setString("name", name);
+          sharedPreferences.setString("phone", phone);
+          sharedPreferences.setString("phone", phone);
+          sharedPreferences.setString("subscriptionNumber", subscriptionNumber);
+          sharedPreferences.setString("address", address);
+          await Navigator.pushReplacementNamed(context, RegisterScreen.id);
+        },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
