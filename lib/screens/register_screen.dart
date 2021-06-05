@@ -1,10 +1,14 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:glance/screens/enter_details_screen.dart';
 import 'package:glance/screens/welcome_screen.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'home_page.dart';
 import 'login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const String id = "register_screen";
@@ -16,9 +20,11 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  String email;
-  String password;
-  String password2;
+  final _auth = FirebaseAuth.instance;
+  bool showSpinner = false;
+  String email = "";
+  String password = "";
+  String password2 = "";
 
   Widget _buildEmailTF() {
     return Column(
@@ -35,6 +41,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           height: 60.0,
           child: TextField(
             onSubmitted: (value){
+              email = value;
+              print(email);
             },
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
@@ -139,7 +147,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: () => Navigator.pushReplacementNamed(context, HomePage.id),
+        onPressed: () async {
+          SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+          if(password == password2){
+            print(email);
+            print(password);
+            setState(() {
+              showSpinner = true;
+            });
+            try {
+              final newuser =
+              await _auth.createUserWithEmailAndPassword(
+                  email: email, password: password);
+              if (newuser != null) {
+                sharedPreferences.setBool('isSignedIn', true);
+                Navigator.pushReplacementNamed(context, HomePage.id);
+              }
+              setState(() {
+                showSpinner = false;
+              });
+            } catch (e) {
+              print(e);
+            }
+          }
+        },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
@@ -178,45 +209,48 @@ class _RegisterScreenState extends State<RegisterScreen> {
             value: SystemUiOverlayStyle.light,
             child : GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
-              child: Stack(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical:20.0, horizontal: 40.0),
-                    child: SingleChildScrollView(
-                      physics: AlwaysScrollableScrollPhysics(),
-                      child: Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              'Register',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontFamily: 'OpenSans',
-                                fontSize: 30.0,
-                                fontWeight: FontWeight.bold,
+              child: ModalProgressHUD(
+                inAsyncCall: showSpinner,
+                child: Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical:20.0, horizontal: 40.0),
+                      child: SingleChildScrollView(
+                        physics: AlwaysScrollableScrollPhysics(),
+                        child: Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                'Register',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: 'OpenSans',
+                                  fontSize: 30.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 30.0),
-                            _buildEmailTF(),
-                            SizedBox(
-                              height: 30.0,
-                            ),
-                            _buildPasswordTF(),
-                            SizedBox(
-                              height: 30.0,
-                            ),
-                            _buildConfirmPasswordTF(),
-                            SizedBox(
-                              height: 30.0,
-                            ),
-                            _buildRegisterBtn(),
-                          ],
+                              SizedBox(height: 30.0),
+                              _buildEmailTF(),
+                              SizedBox(
+                                height: 30.0,
+                              ),
+                              _buildPasswordTF(),
+                              SizedBox(
+                                height: 30.0,
+                              ),
+                              _buildConfirmPasswordTF(),
+                              SizedBox(
+                                height: 30.0,
+                              ),
+                              _buildRegisterBtn(),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

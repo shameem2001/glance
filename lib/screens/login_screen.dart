@@ -8,6 +8,8 @@ import 'package:glance/screens/home_page.dart';
 import 'package:glance/screens/welcome_screen.dart';
 import 'package:glance/utils/authentication.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = "login_screen";
@@ -20,6 +22,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   Authentication authentication;
+
+  final _auth = FirebaseAuth.instance;
 
   bool _rememberMe = false;
   String username;
@@ -58,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
-                Icons.person,
+                Icons.email,
                 color: Colors.black,
               ),
               hintText: 'Enter your email',
@@ -155,7 +159,25 @@ class _LoginScreenState extends State<LoginScreen> {
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: () => Navigator.pushReplacementNamed(context, HomePage.id),
+        onPressed: () async{
+          SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+          setState(() {
+            showSpinner = true;
+          });
+          try {
+            final user = await _auth.signInWithEmailAndPassword(
+                email: username, password: password);
+            if (user != null) {
+              sharedPreferences.setBool('isSignedIn', true);
+              Navigator.pushReplacementNamed(context, HomePage.id);
+            }
+            setState(() {
+              showSpinner = false;
+            });
+          } catch (e) {
+            print(e);
+          }
+          },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
@@ -223,6 +245,8 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  bool showSpinner = false;
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -242,52 +266,55 @@ class _LoginScreenState extends State<LoginScreen> {
             value: SystemUiOverlayStyle.light,
             child: GestureDetector(
               onTap: () => FocusScope.of(context).unfocus(),
-              child: Stack(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 20.0, horizontal: 40.0),
-                    child: SingleChildScrollView(
-                      physics: AlwaysScrollableScrollPhysics(),
-                      child: Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            _buildPhoto(),
-                            SizedBox(height: 30.0),
-                            _buildEmailTF(),
-                            SizedBox(
-                              height: 30.0,
-                            ),
-                            _buildPasswordTF(),
-                            _buildForgotPasswordBtn(),
-                            _buildRememberMeCheckbox(),
-                            _buildLoginBtn(),
-                            _buildSignInWithText(),
-                            // _buildSocialBtn(),
-                            FutureBuilder(
-                              future: Authentication.initializeFirebase(
-                                  context: context),
-                              builder: (context, snapshot) {
-                                if (snapshot.hasError) {
-                                  return Text('Error initializing Firebase');
-                                } else if (snapshot.connectionState ==
-                                    ConnectionState.done) {
-                                  return GoogleSignInButton();
-                                }
-                                return CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    Colors.black,
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
+              child: ModalProgressHUD(
+                inAsyncCall: showSpinner,
+                child: Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 20.0, horizontal: 40.0),
+                      child: SingleChildScrollView(
+                        physics: AlwaysScrollableScrollPhysics(),
+                        child: Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              _buildPhoto(),
+                              SizedBox(height: 30.0),
+                              _buildEmailTF(),
+                              SizedBox(
+                                height: 30.0,
+                              ),
+                              _buildPasswordTF(),
+                              _buildForgotPasswordBtn(),
+                              _buildRememberMeCheckbox(),
+                              _buildLoginBtn(),
+                              _buildSignInWithText(),
+                              // _buildSocialBtn(),
+                              FutureBuilder(
+                                future: Authentication.initializeFirebase(
+                                    context: context),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasError) {
+                                    return Text('Error initializing Firebase');
+                                  } else if (snapshot.connectionState ==
+                                      ConnectionState.done) {
+                                    return GoogleSignInButton();
+                                  }
+                                  return CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      Colors.black,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
