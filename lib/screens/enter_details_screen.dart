@@ -184,7 +184,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () async{
-          if(address != ""){
+          // if(address != ""){
             SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
             sharedPreferences.setString("name", name);
             sharedPreferences.setString("phone", phone);
@@ -192,7 +192,7 @@ class _EnterDetailsScreenState extends State<EnterDetailsScreen> {
             sharedPreferences.setString("subscriptionNumber", subscriptionNumber);
             sharedPreferences.setString("address", address);
             await Navigator.pushReplacementNamed(context, RegisterScreen.id);
-          }
+          // }
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
