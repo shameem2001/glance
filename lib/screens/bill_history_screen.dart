@@ -26,15 +26,15 @@ class _BillHistoryScreenState extends State<BillHistoryScreen> {
   double consumption = 0;
 
   List rows = [
-    {"Date": '20/12/20', "Meter\nreading": "23432", "Consumption": '25644', "Amount\npaid": '₹2324',},
-    {"Date": '20/12/20', "Meter\nreading": "23432", "Consumption": '25644', "Amount\npaid": '₹2324',},
-    {"Date": '20/12/20', "Meter\nreading": "23432", "Consumption": '25644', "Amount\npaid": '₹2324',},
-    {"Date": '20/12/20', "Meter\nreading": "23432", "Consumption": '25644', "Amount\npaid": '₹2324',},
-    {"Date": '20/12/20', "Meter\nreading": "23432", "Consumption": '25644', "Amount\npaid": '₹2324',},
-    {"Date": '20/12/20', "Meter\nreading": "23432", "Consumption": '25644', "Amount\npaid": '₹2324',},
-    {"Date": '20/12/20', "Meter\nreading": "23432", "Consumption": '25644', "Amount\npaid": '₹2324',},
-    {"Date": '20/12/20', "Meter\nreading": "23432", "Consumption": '25644', "Amount\npaid": '₹2324',},
-    {"Date": '20/12/20', "Meter\nreading": "23432", "Consumption": '25644', "Amount\npaid": '₹2324',},
+    {"Date": '20/01/20', "Meter\nreading": "17534", "Consumption": '291', "Amount\npaid": '₹1267',},
+    {"Date": '21/03/20', "Meter\nreading": "17815", "Consumption": '281', "Amount\npaid": '₹1201',},
+    {"Date": '20/05/20', "Meter\nreading": "18117", "Consumption": '302', "Amount\npaid": '₹1510',},
+    {"Date": '23/07/20', "Meter\nreading": "18409", "Consumption": '292', "Amount\npaid": '₹1273',},
+    {"Date": '22/09/20', "Meter\nreading": "18703", "Consumption": '294', "Amount\npaid": '₹1286',},
+    {"Date": '20/11/20', "Meter\nreading": "18990", "Consumption": '287', "Amount\npaid": '₹1240',},
+    {"Date": '24/01/20', "Meter\nreading": "19275", "Consumption": '285', "Amount\npaid": '₹1227',},
+    {"Date": '22/03/20', "Meter\nreading": "19581", "Consumption": '306', "Amount\npaid": '₹1530',},
+    {"Date": '20/05/20', "Meter\nreading": "19860", "Consumption": '279', "Amount\npaid": '₹1189',},
   ];
 
 //Headers or Columns
