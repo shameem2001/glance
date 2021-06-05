@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:glance/components/DrawerBeta.dart';
+import 'package:glance/components/drawer.dart';
 import 'package:glance/screens/notification_screen.dart';
 import 'package:glance/screens/payments_screen.dart';
 import 'package:glance/screens/profile_screen.dart';
