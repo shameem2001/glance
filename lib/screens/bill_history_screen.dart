@@ -26,23 +26,23 @@ class _BillHistoryScreenState extends State<BillHistoryScreen> {
   double consumption = 0;
 
   List rows = [
-    {"Date": '20/01/20', "Meter\nreading": "17534", "Consumption": '291', "Amount\npaid": '₹1267',},
-    {"Date": '21/03/20', "Meter\nreading": "17815", "Consumption": '281', "Amount\npaid": '₹1201',},
-    {"Date": '20/05/20', "Meter\nreading": "18117", "Consumption": '302', "Amount\npaid": '₹1510',},
-    {"Date": '23/07/20', "Meter\nreading": "18409", "Consumption": '292', "Amount\npaid": '₹1273',},
-    {"Date": '22/09/20', "Meter\nreading": "18703", "Consumption": '294', "Amount\npaid": '₹1286',},
-    {"Date": '20/11/20', "Meter\nreading": "18990", "Consumption": '287', "Amount\npaid": '₹1240',},
-    {"Date": '24/01/21', "Meter\nreading": "19275", "Consumption": '285', "Amount\npaid": '₹1227',},
-    {"Date": '22/03/21', "Meter\nreading": "19581", "Consumption": '306', "Amount\npaid": '₹1530',},
-    {"Date": '20/05/21', "Meter\nreading": "19860", "Consumption": '279', "Amount\npaid": '₹1189',},
+    {"Date": '20/01/20', "Meter reading": "17534", "Consumption": '291', "Amount paid": '₹1267',},
+    {"Date": '21/03/20', "Meter reading": "17815", "Consumption": '281', "Amount paid": '₹1201',},
+    {"Date": '20/05/20', "Meter reading": "18117", "Consumption": '302', "Amount paid": '₹1510',},
+    {"Date": '23/07/20', "Meter reading": "18409", "Consumption": '292', "Amount paid": '₹1273',},
+    {"Date": '22/09/20', "Meter reading": "18703", "Consumption": '294', "Amount paid": '₹1286',},
+    {"Date": '20/11/20', "Meter reading": "18990", "Consumption": '287', "Amount paid": '₹1240',},
+    {"Date": '24/01/21', "Meter reading": "19275", "Consumption": '285', "Amount paid": '₹1227',},
+    {"Date": '22/03/21', "Meter reading": "19581", "Consumption": '306', "Amount paid": '₹1530',},
+    {"Date": '20/05/21', "Meter reading": "19860", "Consumption": '279', "Amount paid": '₹1189',},
   ];
 
 //Headers or Columns
   List columns = [
     {"title": 'Date', "index": 1, "key": 'Date'},
-    {"title": 'Meter\nreading', "index": 2, "key": 'Meter\nreading'},
+    {"title": 'Meter\nreading', "index": 2, "key": 'Meter reading'},
     {"title": 'Consumption', "index": 3, "key": 'Consumption'},
-    {"title": 'Amount\npaid', "index": 4, "key": 'Amount\npaid'},
+    {"title": 'Amount\npaid', "index": 4, "key": 'Amount paid'},
     // {"title": 'Reciept', "index": 5, "key": 'Reciept'},
   ];
 
@@ -100,6 +100,7 @@ class _BillHistoryScreenState extends State<BillHistoryScreen> {
             shrinkWrap: true,
             children: [
               Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
@@ -119,12 +120,10 @@ class _BillHistoryScreenState extends State<BillHistoryScreen> {
                         trHeight: 20,
                         onSubmitted: (value) {
                           print(value);
-                          print(rows[0]['power']);
                         },
                         onRowSaved: (value) {
                           //added line
                           print(value);
-                          print(rows[0]['power']); //prints to console
                         },
                         thAlignment: TextAlign.center,
                         thStyle: GoogleFonts.poppins(
