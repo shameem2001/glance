@@ -8,19 +8,19 @@ class UploadIcon extends StatefulWidget {
   _UploadIconState createState() => _UploadIconState();
 }
 class _UploadIconState extends State<UploadIcon> {
-  File _image;
+  PickedFile _image;
   final picker= ImagePicker();
   Future pickImage(bool isCamera) async{
-    File image;
-    // if(isCamera){
-    //   image=await picker.pickImage(source: ImageSource.camera);
-    // }else{
-    //   image=await picker.pickImage(source: ImageSource.gallery);
-    // }
+    PickedFile image;
+    if(isCamera){
+      image=(await picker.getImage(source: ImageSource.camera));
+    }else{
+      image=(await picker.getImage(source: ImageSource.gallery));
+    }
     setState(() {
       _image=image;
     });
-}
+  }
   @override
   Widget build(BuildContext context) {
     return IconButton(

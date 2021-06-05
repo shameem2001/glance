@@ -21,11 +21,12 @@ class PaymentsScreen extends StatefulWidget {
 class _PaymentsScreenState extends State<PaymentsScreen> {
   bool isEnabled = false;
   int billAmount = 0;
+  int consumptionFromMeter = 0;
 
   List date = ['24/01/21', '20/03/21', '22/05/21'];
   List meterReading = [19275, 19581, 19860];
-  List consumption = [285, 306, 279];
-  List amountPaid = [1930, 2036, 1874];
+  List<int> consumption = [285, 306, 279];
+  List amountPaid = [1227, 1530, 1189];
   List reciept = [80, 1, 4];
 
   @override
@@ -42,20 +43,45 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
     setState(() {});
   }
 
-  double newMeterReading;
+  int newMeterReading;
 
-  File _image;
+  PickedFile _image;
   final picker= ImagePicker();
   Future pickImage(bool isCamera) async{
-    File image;
-    // if(isCamera){
-    //   image=await picker.pickImage(source: ImageSource.camera);
-    // }else{
-    //   image=await picker.pickImage(source: ImageSource.gallery);
-    // }
+    PickedFile image;
+    if(isCamera){
+      image=(await picker.getImage(source: ImageSource.camera));
+    }else{
+      image=(await picker.getImage(source: ImageSource.gallery));
+    }
     setState(() {
       _image=image;
     });
+  }
+
+  double calculateEnergyCharge(consumptionFromMeter){
+    double energyCharge = 0;
+    if(consumptionFromMeter <= 40)
+      energyCharge = consumptionFromMeter * 1.5;
+    if(40 < consumptionFromMeter && consumptionFromMeter <= 80)
+      energyCharge = consumptionFromMeter * 2.2;
+    if(80 < consumptionFromMeter && consumptionFromMeter <= 120)
+      energyCharge = 675 + ((consumptionFromMeter - 80) * 3.0);
+    if(120 < consumptionFromMeter && consumptionFromMeter <= 150)
+      energyCharge = 675 + ((consumptionFromMeter - 120) * 3.8);
+    if(150 < consumptionFromMeter && consumptionFromMeter <= 200)
+      energyCharge = 675 + ((consumptionFromMeter - 150) * 5.3);
+    if(200 < consumptionFromMeter && consumptionFromMeter <= 300)
+      energyCharge = 675 + ((consumptionFromMeter - 200) * 6.5);
+    if(300 < consumptionFromMeter && consumptionFromMeter <= 350)
+      energyCharge = consumptionFromMeter * 5.0;
+    if(350 < consumptionFromMeter && consumptionFromMeter <= 400)
+      energyCharge = consumptionFromMeter * 5.5;
+    if(400 < consumptionFromMeter && consumptionFromMeter <= 500)
+      energyCharge = consumptionFromMeter * 6.0;
+    if(consumptionFromMeter > 500)
+      energyCharge = consumptionFromMeter * 7.0;
+    return energyCharge;
   }
 
   @override
@@ -378,6 +404,9 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                         onTap: () {
                           isEnabled = true;
                         },
+                        onFieldSubmitted: (value){
+                          newMeterReading = int.parse(value);
+                        },
                         decoration: new InputDecoration(
                           hintText:
                               !isEnabled ? "Enter new meter reading" : null,
@@ -420,7 +449,27 @@ class _PaymentsScreenState extends State<PaymentsScreen> {
                           ),
                         ),
                       ),
-                      onPressed: () async {},
+                      onPressed: () async{
+                        SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+                        double energyCharge = 0;
+                        int meterReadingLast = meterReading[meterReading.length - 1];
+                        print(meterReadingLast);
+                        consumptionFromMeter = newMeterReading - meterReadingLast;
+                        energyCharge = calculateEnergyCharge(consumptionFromMeter);
+                        double electricityDuty = energyCharge / 10;
+                        double fixedCharge = 120;
+                        double otherCharges = 98;
+                        double netAmount = energyCharge + electricityDuty + fixedCharge + otherCharges;
+                        int calculatedAmount = netAmount.ceil();
+                        print(calculatedAmount);
+
+                        sharedPreferences.setInt("energyCharge", energyCharge.ceil());
+                        sharedPreferences.setInt("meterReadingLast", meterReadingLast);
+                        sharedPreferences.setInt("newMeterReading", newMeterReading);
+                        sharedPreferences.setInt("consumptionFromMeter", consumptionFromMeter);
+                        sharedPreferences.setInt("electricityDuty", electricityDuty.ceil());
+                        sharedPreferences.setInt("calculatedAmount", calculatedAmount);
+                      },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 5.0, horizontal: 12.0),
