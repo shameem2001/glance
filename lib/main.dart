@@ -26,7 +26,7 @@ class Glance extends StatelessWidget {
         primaryColor: Colors.black,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: PaymentsScreen.id,
+      initialRoute: SplashScreen.id,
       routes: {
         SplashScreen.id: (context) => SplashScreen(),
         WelcomeScreen.id: (context) => DoubleBack(
