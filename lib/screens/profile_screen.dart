@@ -20,12 +20,12 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProviderStateMixin {
-  String username = "Daliya Morgan";
-  String emailId = "Daliya.morgan@gmail.com";
-  String mobileNumber = "+919446422342";
+  String username = "Daliya Joseph";
+  String emailId = "daliya.joseph@gmail.com";
+  String mobileNumber = "+919876543210";
   String subscriptionNumber = "85687495349";
-  String address = "Tomkins Square, boulevard street";
-  String pin = "670012";
+  String address = "Kalady, Ernakulam";
+  String pin = "683574";
   String state = "Kerala";
 
   bool _status = true;
