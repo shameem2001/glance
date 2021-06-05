@@ -1,4 +1,4 @@
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -75,6 +75,8 @@ class DrawerBetaState extends State<DrawerBeta> {
                 onTap: () async{
                   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
                   setState(() {
+                    final _auth = FirebaseAuth.instance;
+                    _auth.signOut();
                     _isSigningOut = true;
                   });
                   await Authentication.signOut(context: context);
